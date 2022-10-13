@@ -1,0 +1,19 @@
+@charset 'utf-8';
+
+// common
+@import 'common/reset.scss';
+@import 'common/footer.scss';
+@import 'common/layout.scss';
+@import 'common/header.scss';
+
+// main
+@import 'main/content.scss';
+@import 'main/visual.scss';
+
+// sub
+@import 'sub/community.scss';
+@import 'sub/department.scss';
+@import 'sub/gallery.scss';
+@import 'sub/location.scss';
+@import 'sub/member.scss';
+@import 'sub/youtube.scss';
