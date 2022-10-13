@@ -7,5 +7,5 @@ export default function Footer() {
         <p>2022 DCODELAB &copy; ALL RIGHT RESERVED.</p>
       </div>
     </footer>
-  )
+  );
 }

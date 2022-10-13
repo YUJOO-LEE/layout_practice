@@ -5,5 +5,5 @@ export default function Member() {
     <Layout name='member'>
       <p>Member contents</p>
     </Layout>
-  )
+  );
 }

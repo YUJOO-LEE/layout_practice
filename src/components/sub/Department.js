@@ -5,5 +5,5 @@ export default function Department() {
     <Layout name='department'>
       <p>Department contents</p>
     </Layout>
-  )
+  );
 }

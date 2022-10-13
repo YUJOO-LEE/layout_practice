@@ -49,7 +49,7 @@ export default function Header(props) {
         <FontAwesomeIcon icon={faBars} />
       </div>
     </header>
-  )
+  );
 }
 
 /*

@@ -5,5 +5,5 @@ export default function Youtube() {
     <Layout name='youtube'>
       <p>Youtube contents</p>
     </Layout>
-  )
+  );
 }

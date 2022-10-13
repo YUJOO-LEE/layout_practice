@@ -5,5 +5,5 @@ export default function Gallery() {
     <Layout name='gallery'>
       <p>gallery contents</p>
     </Layout>
-  )
+  );
 }

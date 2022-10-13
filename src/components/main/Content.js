@@ -5,5 +5,5 @@ export default function Content() {
     <main>
       <h1>Content</h1>
     </main>
-  )
+  );
 }

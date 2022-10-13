@@ -5,5 +5,5 @@ export default function Community() {
     <Layout name='community'>
       <p>Community contents</p>
     </Layout>
-  )
+  );
 }

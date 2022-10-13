@@ -5,5 +5,5 @@ export default function Location() {
     <Layout name='location'>
       <p>Location contents</p>
     </Layout>
-  )
+  );
 }
