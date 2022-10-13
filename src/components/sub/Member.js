@@ -1,12 +1,9 @@
-import React from 'react';
+import Layout from '../common/Layout';
 
 export default function Member() {
   return (
-    <section className='content member'>
-      <figure></figure>
-      <div className='inner'>
-        <h1>Member</h1>
-      </div>
-    </section>
+    <Layout name='member'>
+      <p>Member contents</p>
+    </Layout>
   )
 }

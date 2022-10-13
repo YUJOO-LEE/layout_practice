@@ -53,6 +53,7 @@ footer .inner p {
   font: normal 30px/1 "arial";
   color: #777;
   margin-bottom: 50px;
+  text-transform: capitalize;
 }
 
 @media screen and (max-width: 1179px) {
@@ -165,6 +166,10 @@ main {
   background-color: #555;
   position: relative;
   z-index: 1;
+}
+
+.member figure {
+  background-color: lightgreen;
 }
 
 /*# sourceMappingURL=style.css.map */
