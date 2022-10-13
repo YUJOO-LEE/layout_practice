@@ -1,18 +1,32 @@
 .content{
 
   figure{
+    opacity: 0; transition: 1s;
     width: 100%; height: 300px; background-color: #bbb;
   }
 
-  .inner{
+  >.inner{
     width: 1180px;
     min-height: calc(100vh - 300px - 100px - 150px);
+    // figure 300, header+footer 100, margin 150
     margin: 50px auto; position: relative;
+    opacity: 0; transition: opacity 0.5s, transform 1s;
+    transform: translateY(10vh);
 
     h1{
       font: normal 30px/1 'arial';
       color: #777; margin-bottom: 50px;
       text-transform: capitalize;
+    }
+  }
+
+  &.on{
+    figure{
+      opacity: 1;
+    }
+    >.inner{
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
@@ -24,7 +38,9 @@
     }
     .inner{
       width: 100%; 
-      min-height: calc(100vh - 200px - 100px - 150px);padding: 0 40px;
+      min-height: calc(100vh - 200px - 100px - 150px);
+      // figure 200, header+footer 100, margin 150
+      padding: 0 40px;
     }
   }
 }
