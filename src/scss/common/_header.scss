@@ -25,6 +25,11 @@ header{
         }
       }
     }
+
+    .fa-bars{
+      font-size: 24px; display: none;
+      position: absolute; bottom: 20px; right: 40px;
+    }
   }
 
   &.sub{
@@ -35,6 +40,7 @@ header{
       #gnb li a{
         color: #fff;
       }
+      .fa-bars{ color: #fff; }
     }
   }
 
@@ -44,9 +50,26 @@ header{
 
     .inner{
       h1 a{ color: #555; }
-      #gnb li a{
-        color: #555;
-      }
+      #gnb li a{ color: #555; }
+      .fa-bars{ color: #fff; }
     }
   }
+}
+
+@media screen and (max-width: $tablet) {
+ header{
+  width: 100%;
+  .inner{
+    width: 100%;
+    h1{
+      bottom: 20px; left: 40px;
+    }
+    #gnb{
+      display: none;
+    }
+    .fa-bars{
+      display: block;
+    }
+  }
+ }
 }

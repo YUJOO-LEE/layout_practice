@@ -18,7 +18,7 @@ a {
 footer {
   width: 100%;
   border-top: 1px solid #bbb;
-  padding: 100px 0px;
+  padding: 20px 0px;
 }
 footer .inner {
   width: 1180px;
@@ -30,6 +30,29 @@ footer .inner p {
   font: 12px/1 "arial";
   color: #999;
   letter-spacing: 2px;
+}
+
+@media screen and (max-width: 1179px) {
+  footer .inner {
+    width: 100%;
+    padding: 0 40px;
+  }
+}
+.content figure {
+  width: 100%;
+  height: 300px;
+  background-color: #bbb;
+}
+.content .inner {
+  width: 1180px;
+  min-height: calc(100vh - 300px - 250px);
+  margin: 50px auto;
+  position: relative;
+}
+.content .inner h1 {
+  font: normal 30px/1 "arial";
+  color: #777;
+  margin-bottom: 50px;
 }
 
 header {
@@ -63,6 +86,13 @@ header .inner #gnb li a {
   font: bold 14px/1 "arial";
   color: #fff;
 }
+header .inner .fa-bars {
+  font-size: 24px;
+  display: none;
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+}
 header.sub {
   background-color: #222;
 }
@@ -70,6 +100,9 @@ header.sub .inner h1 a {
   color: #fff;
 }
 header.sub .inner #gnb li a {
+  color: #fff;
+}
+header.sub .inner .fa-bars {
   color: #fff;
 }
 header.main {
@@ -81,6 +114,47 @@ header.main .inner h1 a {
 }
 header.main .inner #gnb li a {
   color: #555;
+}
+header.main .inner .fa-bars {
+  color: #fff;
+}
+
+@media screen and (max-width: 1179px) {
+  header {
+    width: 100%;
+  }
+  header .inner {
+    width: 100%;
+  }
+  header .inner h1 {
+    bottom: 20px;
+    left: 40px;
+  }
+  header .inner #gnb {
+    display: none;
+  }
+  header .inner .fa-bars {
+    display: block;
+  }
+}
+main {
+  width: 1180px;
+  min-height: 500px;
+  margin: 150px auto;
+}
+
+@media screen and (max-width: 1179px) {
+  main {
+    width: 100%;
+    padding: 0 40px;
+  }
+}
+#visual {
+  width: 100%;
+  height: 100vh;
+  background-color: #555;
+  position: relative;
+  z-index: 1;
 }
 
 /*# sourceMappingURL=style.css.map */
