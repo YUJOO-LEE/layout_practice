@@ -51,7 +51,7 @@ header{
     .inner{
       h1 a{ color: #555; }
       #gnb li a{ color: #555; }
-      .fa-bars{ color: #fff; }
+      .fa-bars{ color: #555; }
     }
   }
 }
@@ -59,17 +59,13 @@ header{
 @media screen and (max-width: $tablet) {
  header{
   width: 100%;
+
   .inner{
     width: 100%;
-    h1{
-      bottom: 20px; left: 40px;
-    }
-    #gnb{
-      display: none;
-    }
-    .fa-bars{
-      display: block;
-    }
+
+    h1{ bottom: 20px; left: 40px; }
+    #gnb{ display: none; }
+    .fa-bars{ display: block; }
   }
  }
 }

@@ -6,12 +6,24 @@
 
   .inner{
     width: 1180px;
-    min-height: calc(100vh - 300px - 250px);
+    min-height: calc(100vh - 300px - 100px - 150px);
     margin: 50px auto; position: relative;
 
     h1{
       font: normal 30px/1 'arial';
       color: #777; margin-bottom: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .content{
+    figure{
+      height: 200px;
+    }
+    .inner{
+      width: 100%; 
+      min-height: calc(100vh - 200px - 100px - 150px);padding: 0 40px;
     }
   }
 }

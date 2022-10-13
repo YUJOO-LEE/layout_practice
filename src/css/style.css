@@ -45,7 +45,7 @@ footer .inner p {
 }
 .content .inner {
   width: 1180px;
-  min-height: calc(100vh - 300px - 250px);
+  min-height: calc(100vh - 300px - 100px - 150px);
   margin: 50px auto;
   position: relative;
 }
@@ -55,6 +55,16 @@ footer .inner p {
   margin-bottom: 50px;
 }
 
+@media screen and (max-width: 1179px) {
+  .content figure {
+    height: 200px;
+  }
+  .content .inner {
+    width: 100%;
+    min-height: calc(100vh - 200px - 100px - 150px);
+    padding: 0 40px;
+  }
+}
 header {
   width: 100%;
   background-color: #222;
@@ -116,7 +126,7 @@ header.main .inner #gnb li a {
   color: #555;
 }
 header.main .inner .fa-bars {
-  color: #fff;
+  color: #555;
 }
 
 @media screen and (max-width: 1179px) {
