@@ -172,7 +172,7 @@ header.main .inner .fa-bars {
 .pop {
   width: 100%;
   height: 100vh;
-  padding: 5vw;
+  padding: 10vw;
   background-color: rgba(0, 0, 0, 0.9);
   position: fixed;
   top: 0;
@@ -183,7 +183,14 @@ header.main .inner .fa-bars {
 .pop .con {
   width: 100%;
   height: 100%;
-  border: 1px solid #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pop .con iframe {
+  width: 100%;
+  min-height: 50%;
+  aspect-ratio: 16/9;
 }
 .pop .close {
   font: bold 14px/1 "arial";

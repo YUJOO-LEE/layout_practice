@@ -12,6 +12,7 @@ export default function Youtube() {
 
   const [videos, setVideos] = useState([]);
   const [open, setOpen] = useState(false);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     axios.get(url).then((json)=>{
@@ -38,14 +39,16 @@ export default function Youtube() {
                 <p>{description}</p>
                 <span>{date}</span>
               </div>
-              <div className="pic" onClick={()=>{ setOpen(true)}}>
+              <div className="pic" onClick={()=>{ setOpen(true); setIndex(index)}}>
                 <img src={data.snippet.thumbnails.standard.url} alt={data.snippet.title} />
               </div>
             </article>
           );
         })}
       </Layout>
-      { open && <Popup setOpen={setOpen}></Popup> }
+      { open && <Popup setOpen={setOpen}>
+        <iframe src={`https://www.youtube.com/embed/${videos[index].snippet.resourceId.videoId}`} frameborder="0"></iframe>
+      </Popup> }
     </>
   );
 }
