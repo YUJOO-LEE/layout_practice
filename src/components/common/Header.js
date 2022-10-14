@@ -1,47 +1,47 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
 import { faBars } from '@fortawesome/free-solid-svg-icons' 
 
 
 export default function Header(props) {
-  const active = { color: 'red' };
+  const active = { color: 'orange' };
   return (
     <header className={props.type}>
       <div className="inner">
         <h1>
-          <NavLink exact to='/'>
+          <Link to='/'>
             LOGO
-          </NavLink>
+          </Link>
         </h1>
         <ul id="gnb">
           <li>
-            <NavLink exact to='/department' activeStyle={active}>
+            <NavLink to='/department' activeStyle={active}>
               Department
             </NavLink>
           </li>
           <li>
-            <NavLink exact to='/community' activeStyle={active}>
+            <NavLink to='/community' activeStyle={active}>
               Community
             </NavLink>
           </li>
           <li>
-            <NavLink exact to='/gallery' activeStyle={active}>
+            <NavLink to='/gallery' activeStyle={active}>
               Gallery
             </NavLink>
           </li>
           <li>
-            <NavLink exact to='/youtube' activeStyle={active}>
+            <NavLink to='/youtube' activeStyle={active}>
               Youtube
             </NavLink>
           </li>
           <li>
-            <NavLink exact to='/location' activeStyle={active}>
+            <NavLink to='/location' activeStyle={active}>
               Location
             </NavLink>
           </li>
           <li>
-            <NavLink exact to='/member' activeStyle={active}>
+            <NavLink to='/member' activeStyle={active}>
               Member
             </NavLink>
           </li>

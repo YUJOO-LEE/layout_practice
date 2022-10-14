@@ -142,13 +142,13 @@ header.main {
   border-bottom: 1px solid #ccc;
 }
 header.main .inner h1 a {
-  color: #555;
+  color: #222;
 }
 header.main .inner #gnb li a {
-  color: #555;
+  color: #333;
 }
 header.main .inner .fa-bars {
-  color: #555;
+  color: #333;
 }
 
 @media screen and (max-width: 1179px) {
@@ -169,6 +169,30 @@ header.main .inner .fa-bars {
     display: block;
   }
 }
+.pop {
+  width: 100%;
+  height: 100vh;
+  padding: 5vw;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+.pop .con {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #555;
+}
+.pop .close {
+  font: bold 14px/1 "arial";
+  color: orange;
+  position: absolute;
+  top: 40px;
+  right: 5vw;
+  cursor: pointer;
+}
+
 main {
   width: 1180px;
   min-height: 500px;
