@@ -1,4 +1,15 @@
+import { useEffect } from 'react';
+
 export default function Popup(props) {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return (()=>{
+      document.body.style.overflow = 'auto';
+    })
+  }, [])
+  
+
   return (
     <aside className="pop">
       <div className="con">{props.children}</div>

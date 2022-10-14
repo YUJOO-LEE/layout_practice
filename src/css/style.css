@@ -178,6 +178,7 @@ header.main .inner .fa-bars {
   top: 0;
   left: 0;
   z-index: 5;
+  overflow: hidden;
 }
 .pop .con {
   width: 100%;
