@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100&display=swap');
+
 .content{
 
   figure{
@@ -14,9 +16,16 @@
     transform: translateY(10vh);
 
     h1{
-      font: normal 30px/1 'arial';
-      color: #777; margin-bottom: 50px;
+      font: normal 30px/1 'Work Sans';
+      color: #111; margin-bottom: 50px;
       text-transform: capitalize;
+
+      &::after{
+        content: ''; display: block;
+        width: 60px; height: 1px;
+        background-color: #555;
+        margin-top: 20px;
+      }
     }
   }
 
