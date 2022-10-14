@@ -17,8 +17,11 @@ HTTP 요청 가로챌 수 있음
 download 요청에 대해 기본적인 지원
 
 
-axios.get(`${path}/db/members.json`).then((json)=>{
-  setMembers(json.data.members);
+
+import axios from 'axios';
+
+axios.get(경로).then((json)=>{
+  받아온 데이터 처리;
 })
 
 

@@ -242,4 +242,74 @@ main {
   background-color: lightgreen;
 }
 
+.youtube article {
+  border-top: 1px solid #aaa;
+  padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.youtube article .txt {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}
+.youtube article .txt h3 {
+  font: bold 24px/1 "Work Sans";
+  color: #777;
+  margin-bottom: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.youtube article .txt p {
+  flex: 1;
+  font: 14px/1.2 "arial";
+  color: #999;
+  filter: saturate(0);
+  margin-bottom: 20px;
+}
+.youtube article .txt span {
+  font: 12px/1 "arial";
+  color: orange;
+}
+.youtube article .pic {
+  width: 40%;
+  height: 200px;
+  background-color: #000;
+  filter: saturate(0);
+  transition: 0.5s;
+}
+.youtube article .pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.youtube article .pic:hover {
+  filter: saturate(1);
+}
+
+@media screen and (max-width: 1179px) {
+  .youtube article .txt {
+    width: 100%;
+  }
+  .youtube article .pic {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+@media screen and (max-width: 539px) {
+  .youtube article {
+    padding: 30px 0;
+  }
+  .youtube article .txt h3 {
+    margin-bottom: 30px;
+  }
+  .youtube article .txt p {
+    margin-bottom: 30px;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */
