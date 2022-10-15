@@ -47,7 +47,7 @@ export default function Youtube() {
         })}
       </Layout>
       { open && <Popup setOpen={setOpen}>
-        <iframe src={`https://www.youtube.com/embed/${videos[index].snippet.resourceId.videoId}`} frameborder="0"></iframe>
+        <iframe src={`https://www.youtube.com/embed/${videos[index].snippet.resourceId.videoId}`} frameBorder="0"></iframe>
       </Popup> }
     </>
   );
