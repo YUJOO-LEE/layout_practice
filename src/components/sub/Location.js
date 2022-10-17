@@ -89,15 +89,16 @@ export default function Location() {
     <Layout name="location">
       <div id="map" ref={container}></div>
       <button onClick={()=>{setTraffic(!isTraffic)}}>{isTraffic ? 'Traffic Off' : 'Traffic On'}</button>
+      {/* state 값에 따라 버튼내 텍스트 변경 */}
 
       <ul className='branch'>
         {info.map((data, i) => {
           return (
             <li key={i} onClick={()=>{setIndex(i)}}>{data.title}</li>
           );
+          // info 리스트에서 정보 하나씩 뿌리기
         })}
       </ul>
     </Layout>
   );
-  // state 값에 따라 버튼내 텍스트 변경
 }
