@@ -270,6 +270,15 @@ main {
     height: 200px;
   }
 }
+.location figure {
+  background-color: lightblue;
+}
+.location #map {
+  width: 100%;
+  height: 500px;
+  background: #000;
+}
+
 .member figure {
   background-color: lightgreen;
 }
