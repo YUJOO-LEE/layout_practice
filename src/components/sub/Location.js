@@ -48,29 +48,39 @@ export default function Location() {
     level: 3 //지도의 레벨(확대, 축소 정도)
   };
 
-
-  const markerPosition = info[index].latLng;
-  // 마커 포지션 생성
   const imageSrc = info[index].imgSrc;
   const imageSize = info[index].imgSize;
   const imageOption = info[index].imgPos;
-  const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
   // 마커 이미지 정보 생성
 
   const marker = new kakao.maps.Marker({
-    position: markerPosition,
-    image: markerImage
+    position: info[index].latLng,
+    image: new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
   })
   // 마커 생성
 
   useEffect(() => {
     // 최초 마운트 시 지도 그리기
-    let mapInstance = new kakao.maps.Map(container.current, option);
+    const mapInstance = new kakao.maps.Map(container.current, option);
     // 지도 생성 및 객체 리턴
+
+    const mapTypeControl = new kakao.maps.MapTypeControl();
+    mapInstance.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+    // 지도 컨트롤 추가
+
+    const zoomControl = new kakao.maps.ZoomControl();
+    mapInstance.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+    // 줌 컨트롤 생성
+
     marker.setMap(mapInstance);
     // 지도상에 마커 표시
+
     setLocation(mapInstance);
     // location State 업데이트
+
+    window.addEventListener('resize', ()=>{
+      mapInstance.setCenter(info[index].latLng);
+    })
 
     return (()=>{
       container.current.innerHTML = '';
@@ -83,16 +93,11 @@ export default function Location() {
     // location 값 비어있을 시 오류 방지
 
     isTraffic
-    ?location.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC)
-    :location.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+      ?location.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC)
+      :location.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
     // 교통 상황 표시 활성화
 
   }, [isTraffic])
-
-  window.addEventListener('resize', ()=>{
-    if (!location) return;
-    location.setCenter(info[index].latLng);
-  })
 
   return (
     <Layout name="location">
