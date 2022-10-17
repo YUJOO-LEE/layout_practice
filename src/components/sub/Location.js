@@ -65,12 +65,16 @@ export default function Location() {
 
   useEffect(() => {
     // 최초 마운트 시 지도 그리기
-    const mapInstance = new kakao.maps.Map(container.current, option);
+    let mapInstance = new kakao.maps.Map(container.current, option);
     // 지도 생성 및 객체 리턴
     marker.setMap(mapInstance);
     // 지도상에 마커 표시
     setLocation(mapInstance);
     // location State 업데이트
+
+    return (()=>{
+      container.current.innerHTML = '';
+    });
   }, [index])
 
   useEffect(() => {
@@ -85,20 +89,30 @@ export default function Location() {
 
   }, [isTraffic])
 
+  window.addEventListener('resize', ()=>{
+    if (!location) return;
+    location.setCenter(info[index].latLng);
+  })
+
   return (
     <Layout name="location">
       <div id="map" ref={container}></div>
-      <button onClick={()=>{setTraffic(!isTraffic)}}>{isTraffic ? 'Traffic Off' : 'Traffic On'}</button>
-      {/* state 값에 따라 버튼내 텍스트 변경 */}
-
-      <ul className='branch'>
-        {info.map((data, i) => {
-          return (
-            <li key={i} onClick={()=>{setIndex(i)}}>{data.title}</li>
-          );
-          // info 리스트에서 정보 하나씩 뿌리기
-        })}
-      </ul>
+      <div className="btnSet">
+        <button onClick={()=>{setTraffic(!isTraffic)}}>{isTraffic ? 'Traffic Off' : 'Traffic On'}</button>
+        {/* state 값에 따라 버튼내 텍스트 변경 */}
+        <ul className='branch'>
+          {info.map((data, i) => {
+            return (
+              <li key={i} 
+              onClick={()=>{setIndex(i)}} 
+              className={index === i ? 'on' : null}>
+                {data.title}
+              </li>
+            );
+            // info 리스트에서 정보 하나씩 뿌리기
+          })}
+        </ul>
+      </div>
     </Layout>
   );
 }
