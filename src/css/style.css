@@ -364,10 +364,18 @@ main {
   border-left: 1px solid #bbb;
   padding: 15px 30px;
 }
-.member > .inner table td input[type=text] {
+.member > .inner table td input[type=text],
+.member > .inner table td input[type=password] {
   width: 40%;
   border: 1px solid #aaa;
   padding: 6px 10px;
+}
+.member > .inner table td label {
+  margin-right: 6px;
+}
+.member > .inner table td input[type=radio],
+.member > .inner table td input[type=checkbox] {
+  margin-right: 20px;
 }
 .member > .inner table td .err {
   font: 12px/1 "arial";
