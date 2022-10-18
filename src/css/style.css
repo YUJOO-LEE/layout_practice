@@ -16,6 +16,24 @@ a {
   color: inherit;
 }
 
+body {
+  background-color: #efefef;
+}
+
+.hidden {
+  position: absolute;
+  text-indent: -99999px;
+  overflow: hidden;
+}
+
+fieldset {
+  border: 0;
+}
+
+table, th, td {
+  border-collapse: collapse;
+}
+
 footer {
   width: 100%;
   border-top: 1px solid #bbb;
@@ -312,6 +330,49 @@ main {
 
 .member figure {
   background-color: lightgreen;
+}
+.member > .inner table {
+  width: 100%;
+  border: 0;
+  border-top: 2px solid #333;
+  border-bottom: 1px solid #333;
+}
+.member > .inner table th {
+  width: 20%;
+  border: 0;
+  border-bottom: 1px solid #bbb;
+  padding: 15px 30px;
+  text-align: left;
+}
+.member > .inner table th:last-of-type {
+  text-align: center;
+}
+.member > .inner table th button[type=reset],
+.member > .inner table th button[type=submit] {
+  width: 150px;
+  height: 30px;
+  border: 1px solid #aaa;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.member > .inner table td {
+  border: 0;
+  border-bottom: 1px solid #bbb;
+  border-left: 1px solid #bbb;
+  padding: 15px 30px;
+}
+.member > .inner table td input[type=text] {
+  width: 40%;
+  border: 1px solid #aaa;
+  padding: 6px 10px;
+}
+.member > .inner table td .err {
+  font: 12px/1 "arial";
+  color: red;
+  margin-left: 10px;
 }
 
 .youtube article {

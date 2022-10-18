@@ -38,9 +38,9 @@ export default function Member() {
     <Layout name='member'>
       <form action="">
         <fieldset>
-          <legend>회원 가입 폼 양식</legend>
+          <legend className='hidden'>회원 가입 폼 양식</legend>
           <table border={1}>
-            <caption>회원 가입 정보 입력</caption>
+            <caption className='hidden'>회원 가입 정보 입력</caption>
             <tbody>
               <tr>
                 <th scope='row'>
@@ -53,7 +53,7 @@ export default function Member() {
                     value={val.userId}
                     onChange={handleChange}
                   />
-                  {err.userId && <p>{err.userId}</p>}
+                  {err.userId && <span className='err'>{err.userId}</span>}
                 </td>
               </tr>
 

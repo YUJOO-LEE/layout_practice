@@ -16,3 +16,21 @@ a{
   text-decoration: none;
   color: inherit;
 }
+
+body{
+  background-color: #efefef;
+}
+
+.hidden{
+  position: absolute;
+  text-indent: -99999px;
+  overflow: hidden;
+}
+
+fieldset{
+  border: 0;
+}
+
+table,th,td{
+  border-collapse: collapse;
+}
