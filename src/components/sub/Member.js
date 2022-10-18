@@ -58,8 +58,7 @@ export default function Member() {
     return errs;
   }
 
-  const handleReset = (e) => {
-    e.preventDefault();
+  const handleReset = () => {
     setVal(initVal);
     setErr({});
   }
