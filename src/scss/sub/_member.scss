@@ -18,7 +18,7 @@
         padding: 15px 30px;
         text-align: left;
 
-        &:last-of-type{
+        &:last-child{
           text-align: center;
         }
 
@@ -64,6 +64,63 @@
           font: 12px/1 'arial';
           color: red;
           margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .member{
+    >.inner{
+      table{
+        td{
+          input[type=text],
+          input[type=password],
+          textarea,
+          select{
+            width: 80%;
+          }
+  
+          .err{
+            display: block;
+            margin-top: 10px;
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $mobile) {
+  .member{
+    >.inner{
+      table{
+        th{
+          display: none;
+          padding: 15px 0px;
+
+          &:last-child{
+            display: block;
+            width: 100%;
+
+            button{
+              width: 30%;
+            }
+          }
+        }
+
+        td{
+          border-left: 0;
+          padding: 15px 0;
+
+          input[type=text],
+          input[type=password],
+          textarea,
+          select{
+            width: 100%;
+          }
         }
       }
     }

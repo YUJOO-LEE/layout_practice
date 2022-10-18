@@ -344,7 +344,7 @@ main {
   padding: 15px 30px;
   text-align: left;
 }
-.member > .inner table th:last-of-type {
+.member > .inner table th:last-child {
   text-align: center;
 }
 .member > .inner table th button[type=reset],
@@ -386,6 +386,42 @@ main {
   margin-left: 10px;
 }
 
+@media screen and (max-width: 1179px) {
+  .member > .inner table td input[type=text],
+.member > .inner table td input[type=password],
+.member > .inner table td textarea,
+.member > .inner table td select {
+    width: 80%;
+  }
+  .member > .inner table td .err {
+    display: block;
+    margin-top: 10px;
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: 539px) {
+  .member > .inner table th {
+    display: none;
+    padding: 15px 0px;
+  }
+  .member > .inner table th:last-child {
+    display: block;
+    width: 100%;
+  }
+  .member > .inner table th:last-child button {
+    width: 30%;
+  }
+  .member > .inner table td {
+    border-left: 0;
+    padding: 15px 0;
+  }
+  .member > .inner table td input[type=text],
+.member > .inner table td input[type=password],
+.member > .inner table td textarea,
+.member > .inner table td select {
+    width: 100%;
+  }
+}
 .youtube article {
   border-top: 1px solid #aaa;
   padding: 20px 0;
