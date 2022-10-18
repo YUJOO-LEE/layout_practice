@@ -1,19 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Layout from '../common/Layout';
 
 export default function Member() {
+
+  const history = useHistory();
+  /*
+    useHistory : URL 주소를 변경할 때 사용하는 Hook
+    - 리액트는 url변경 없이 컴포넌트만 변경시킬 수 있지만
+    useHistory로 url 주소를 변경해서 사용자가 인식하도록 함
+    - 사용자 친화적 페이지 구축
+
+    - Router v5 : useHistory
+    - Router v6 : useNavigate
+  */
 
   const initVal = {
     userId: '',
     email: '',
     pwd1: '',
     pwd2: '',
-    gender: '',
-    interests: '',
+    gender: null,
+    interests: null,
+    edu: '',
+    comments: '',
   };
 
   const [ val, setVal ] = useState(initVal);
   const [ err, setErr ] = useState({});
+  const [ submit, setSubmit ] = useState(false);
 
   const checkVal = (value) => {
     const errs = {};
@@ -55,17 +70,27 @@ export default function Member() {
       errs.interests = '관심사를 하나 이상 선택하세요.';
     }
 
+    if (value.comments < 10) {
+      errs.comments = '남기는 말을 10글자 이상 입력하세요.';
+    }
+
+    if (!value.edu) {
+      errs.edu = '학력을 선택하세요.';
+    }
+
     return errs;
   }
 
   const handleReset = () => {
     setVal(initVal);
     setErr({});
+    setSubmit(false);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErr(checkVal(val));
+    setSubmit(true);
   }
 
   // 함수가 호이스팅 되는 것을 방지하기 위해 변수를 먼저 선언하고 후할당한다.
@@ -76,23 +101,36 @@ export default function Member() {
   }
 
   const handleRadio = (e) => {
-    const {name} = e.target;
+    const { name } = e.target;
     const isChecked = e.target.checked;
     setVal({...val, [name]: isChecked});
   }
 
   const handleCheck = (e) => {
-    const {name} = e.target;
+    const { name } = e.target;
     let isChecked = false;
     isChecked = e.target.checked ? true : false;
     setVal({...val, [name]: isChecked});
   }
 
-  console.log(val);
+  const handleSelect = (e) => {
+    const { name } = e.target;
+    const isSelected = e.target.value;
+    setVal({...val, [name]: isSelected});
+  }
+
+  useEffect(() => {
+    const len = Object.keys(err).length;
+    if (!len && submit) {
+      alert('회원 가입이 완료되었습니다. 메인 페이지로 이동합니다');
+      history.push('/youtube');
+    };
+  }, [])
+  
 
   return (
     <Layout name='member'>
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <fieldset>
           <legend className='hidden'>회원 가입 폼 양식</legend>
           <table border={1}>
@@ -200,9 +238,43 @@ export default function Member() {
               </tr>
 
               <tr>
+                <th scope='row'>
+                  <label htmlFor="edu">EDUCATION</label>
+                </th>
+                <td>
+                  <select name="edu" id="edu"
+                    onChange={handleSelect}
+                  >
+                    <option value="">학력을 선택하세요</option>
+                    <option value="elementary">초등학교 졸업</option>
+                    <option value="middle">중학교 졸업</option>
+                    <option value="high">고등학교 졸업</option>
+                    <option value="college">대학교 졸업</option>
+                  </select>
+                  {err.edu && <span className='err'>{err.edu}</span>}
+                </td>
+              </tr>
+
+              <tr>
+                <th scope='row'>
+                  <label htmlFor="comments">COMMENT</label>
+                </th>
+                <td>
+                  <textarea 
+                    name="comments" id="comments" 
+                    value={val.comments}
+                    onChange={handleChange}
+                    rows="5"
+                    placeholder='남기실 말을 입력하세요'
+                  ></textarea>
+                  {err.comments && <span className='err'>{err.comments}</span>}
+                </td>
+              </tr>
+
+              <tr>
                 <th colSpan={2}>
                   <button type='reset' onClick={handleReset}>RESET</button>
-                  <button type='submit' onClick={handleSubmit}>SUBMIT</button>
+                  <button type='submit'>SUBMIT</button>
                 </th>
               </tr>
             </tbody>
