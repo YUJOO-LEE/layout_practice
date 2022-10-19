@@ -36,15 +36,22 @@ export default function Community() {
     resetForm();
   };
 
-  const editPost = (id) => {
+  const editPost = (index) => {
     const title = editInput.current.value.trim();
     const content = editTextarea.current.value.trim();
 
     if (!title || !content) return;
 
-    const newData = posts.slice();
-    newData[id] = {"title": title, "content": content, "enableUpdate": false};
-    setPosts(newData);
+    // const newData = posts.slice();
+    // newData[id] = {"title": title, "content": content, "enableUpdate": false};
+    setPosts(posts.map((data, i)=>{
+      if (i === index) {
+        data.title = title;
+        data.content = content;
+        data.enableUpdate = false;
+      }
+      return data;
+    }));
   }
 
   const enableUpdate = (index) => {
