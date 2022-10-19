@@ -43,7 +43,7 @@ export default function Community() {
     if (!title || !content) return;
 
     // const newData = posts.slice();
-    // newData[id] = {"title": title, "content": content, "enableUpdate": false};
+    // newData[index] = {"title": title, "content": content, "enableUpdate": false};
     setPosts(posts.map((data, i)=>{
       if (i === index) {
         data.title = title;
