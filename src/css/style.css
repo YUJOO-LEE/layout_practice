@@ -117,12 +117,15 @@ header .inner {
 }
 header .inner h1 {
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
   left: 0;
 }
 header .inner h1 a {
   font: bold 24px/1 "arial";
   color: #fff;
+}
+header .inner h1 img {
+  height: 30px;
 }
 header .inner #gnb {
   position: absolute;
@@ -144,29 +147,30 @@ header .inner .fa-bars {
   right: 40px;
 }
 header.sub {
-  background-color: #222;
+  background-color: #fff;
+  border-bottom: 1px solid #999;
 }
 header.sub .inner h1 a {
-  color: #fff;
-}
-header.sub .inner #gnb li a {
-  color: #fff;
-}
-header.sub .inner .fa-bars {
-  color: #fff;
-}
-header.main {
-  background-color: #fff;
-  border-bottom: 1px solid #ccc;
-}
-header.main .inner h1 a {
   color: #222;
 }
-header.main .inner #gnb li a {
+header.sub .inner #gnb li a {
   color: #333;
 }
-header.main .inner .fa-bars {
+header.sub .inner .fa-bars {
   color: #333;
+}
+header.main {
+  background-color: #222;
+  border-bottom: 1px solid #222;
+}
+header.main .inner h1 a {
+  color: #fff;
+}
+header.main .inner #gnb li a {
+  color: #fff;
+}
+header.main .inner .fa-bars {
+  color: #fff;
 }
 
 @media screen and (max-width: 1179px) {
@@ -237,6 +241,105 @@ main {
   background-color: #555;
   position: relative;
   z-index: 1;
+}
+
+.community > .inner .inputBox {
+  width: 100%;
+  border: 1px solid #bbb;
+  padding: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.community > .inner .inputBox input[type=text], .community > .inner .inputBox textarea {
+  width: 50%;
+  padding: 8px 10px;
+  border: 1px solid #aaa;
+  resize: none;
+  font-family: inherit;
+}
+.community > .inner .inputBox .btnSet {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.community > .inner .inputBox .btnSet button {
+  width: 80px;
+  padding: 8px 10px;
+  background-color: #555;
+  border: 1px solid #555;
+  color: #fff;
+  cursor: pointer;
+}
+.community > .inner .listBox {
+  width: 100%;
+  border: 1px solid #bbb;
+  padding: 50px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.community > .inner .listBox article {
+  background-color: #fff;
+  padding: 30px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 10px;
+}
+.community > .inner .listBox article button {
+  margin: 3px;
+  padding: 5px;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+}
+.community > .inner .listBox article .editTxt {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.community > .inner .listBox article .editTxt input[type=text], .community > .inner .listBox article .editTxt textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #aaa;
+  resize: none;
+  font-family: inherit;
+}
+.community > .inner .listBox article .editBtnSet {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.community > .inner .listBox article .editBtnSet button {
+  width: 100%;
+}
+.community > .inner .listBox article .editBtnSet button:nth-of-type(1) {
+  background-color: lightgray;
+}
+.community > .inner .listBox article .editBtnSet button:nth-of-type(2) {
+  background-color: gray;
+}
+.community > .inner .listBox article .txt {
+  flex: 1;
+}
+.community > .inner .listBox article .btnSet {
+  display: flex;
+  align-items: center;
+}
+.community > .inner .listBox article .btnSet button:nth-of-type(1) {
+  background-color: gray;
+}
+.community > .inner .listBox article .btnSet button:nth-of-type(2) {
+  background-color: lightgray;
 }
 
 .department > .inner::after {
