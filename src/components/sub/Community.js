@@ -155,7 +155,7 @@ export default function Community() {
                     </>
                   : <>
                     <div className="txt">
-                      <h3>{i}{data.title}</h3>
+                      <h3>{data.title}</h3>
                       <p>{data.content}</p>
                     </div>
                     <div className='btnSet'>
