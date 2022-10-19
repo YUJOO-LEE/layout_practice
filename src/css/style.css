@@ -223,24 +223,36 @@ header.main .inner .fa-bars {
   cursor: pointer;
 }
 
-main {
-  width: 1180px;
-  min-height: 500px;
-  margin: 150px auto;
-}
-
-@media screen and (max-width: 1179px) {
-  main {
-    width: 100%;
-    padding: 0 40px;
-  }
-}
 #visual {
   width: 100%;
   height: 100vh;
   background-color: #555;
   position: relative;
   z-index: 1;
+}
+
+#news {
+  width: 100%;
+  height: 100vh;
+  background-color: #c6ffc6;
+  position: relative;
+  padding: 10vw;
+}
+
+#pics {
+  width: 100%;
+  height: 100vh;
+  background-color: #c6fcff;
+  position: relative;
+  padding: 10vw;
+}
+
+#vids {
+  width: 100%;
+  height: 100vh;
+  background-color: #fffac6;
+  position: relative;
+  padding: 10vw;
 }
 
 .community > .inner .inputBox {

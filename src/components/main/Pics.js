@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function Pics() {
   return (
-    <section>
+    <main id='pics'>
       <h1>News</h1>
-    </section>
+    </main>
   );
 }

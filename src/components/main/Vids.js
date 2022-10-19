@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function Vids() {
   return (
-    <section>
+    <main id='vids'>
       <h1>Vids</h1>
-    </section>
+    </main>
   );
 }

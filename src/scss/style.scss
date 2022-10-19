@@ -9,8 +9,10 @@ $mobile: 539px;
 @import 'common/popup.scss';
 
 // main
-@import 'main/main.scss';
 @import 'main/visual.scss';
+@import 'main/news.scss';
+@import 'main/pics.scss';
+@import 'main/vids.scss';
 
 // sub
 @import 'sub/community.scss';
