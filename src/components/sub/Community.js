@@ -3,20 +3,44 @@ import Layout from '../common/Layout';
 
 export default function Community() {
 
-  const dummyPosts = [
-    { title: 'HELLO1', content: "HERE COMES DESCRIPTION DETAIL."},
-    { title: 'HELLO2', content: "HERE COMES DESCRIPTION DETAIL."},
-    { title: 'HELLO3', content: "HERE COMES DESCRIPTION DETAIL."},
-    { title: 'HELLO4', content: "HERE COMES DESCRIPTION DETAIL."},
-    { title: 'HELLO5', content: "HERE COMES DESCRIPTION DETAIL."}
-  ]
+  /*
+  페이지 데이터 저장
+
+  1. 서버 DB로 저장
+
+  2. 브라우저 내 Local stolage 내 저장
+  - 저장 : localStorage.setItem('key', 'value');
+  - 읽기 : localStorage.getItem('key');
+  - 삭제 : localStorage.removeItem('key');
+  - 전체 삭제 : localStorage.clear();
+
+  객체의 경우 JSON.stringfy()로 문자열로 변환 후 사용 가능하다.
+  만료기간이 없어서 임의로 삭제하지 않는 이상 데이터가 브라우저에 영구적으로 남아있다.
+  
+  */
+
+  const getLocalData = () => {
+    const dummyPosts = [
+      { title: 'TITLE01', content: "HERE COMES DESCRIPTION IN DETAILS."},
+      { title: 'TITLE02', content: "HERE COMES DESCRIPTION IN DETAILS."},
+      { title: 'TITLE03', content: "HERE COMES DESCRIPTION IN DETAILS."},
+      { title: 'TITLE04', content: "HERE COMES DESCRIPTION IN DETAILS."},
+      { title: 'TITLE05', content: "HERE COMES DESCRIPTION IN DETAILS."}
+    ]
+
+    // 로컬 스토리지 데이터 불러오기
+    let data = localStorage.getItem('post');
+    // 로컬 데이터 없으면 더미 데이터 넣기
+    data = data ? JSON.parse(data) : dummyPosts;
+    return data;
+  }
 
   const input = useRef(null);
   const textarea = useRef(null);
   const editInput = useRef(null);
   const editTextarea = useRef(null);
 
-  const [ posts, setPosts ] = useState(dummyPosts);
+  const [ posts, setPosts ] = useState(getLocalData());
 
   const resetForm = () => {
     input.current.value = '';
@@ -29,8 +53,9 @@ export default function Community() {
 
     if (!title || !content) return;
 
-    setPosts([...posts,
-      {"title": title, "content": content}
+    setPosts([
+      {"title": title, "content": content},
+      ...posts
     ])
 
     resetForm();
@@ -88,6 +113,7 @@ export default function Community() {
 
   useEffect(()=>{
     console.log(posts);
+    localStorage.setItem('post', JSON.stringify(posts));
   }, [posts])
 
   return (
@@ -107,7 +133,7 @@ export default function Community() {
         </div>
       </div>
       <div className="listBox">
-          {posts.slice().map((data, i)=>{
+          {posts.length && posts.map((data, i)=>{
             return (
               <article key={i}>
                 {data.enableUpdate
@@ -131,7 +157,7 @@ export default function Community() {
                     </>
                   : <>
                     <div className="txt">
-                      <h3>{data.title}</h3>
+                      <h3>{i}{data.title}</h3>
                       <p>{data.content}</p>
                     </div>
                     <div className='btnSet'>

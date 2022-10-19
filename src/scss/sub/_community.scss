@@ -41,7 +41,7 @@
       border: 1px solid #bbb;
       padding: 50px;
       display: flex;
-      flex-direction: column-reverse;
+      flex-direction: column;
 
       article{
         background-color: #fff;
@@ -110,6 +110,67 @@
             &:nth-of-type(2){
               background-color: lightgray;
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .community{
+    >.inner{
+      .inputBox{
+        input[type=text],
+        textarea{
+          width: 100%;
+        }
+        .btnSet{
+          width: 100%;
+
+          button{
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: $mobile) {
+  .community{
+    >.inner{
+      padding: 0 20px;
+
+      .inputBox{
+        border: 0;
+        padding: 0;
+
+        input[type=text],
+        textarea{
+          width: 100%;
+        }
+        .btnSet{
+          width: 100%;
+          
+          button{
+            width: 50%;
+          }
+        }
+      }
+      .listBox{
+        border: 0;
+        padding: 0;
+
+        article{
+          padding: 40px 20px;
+          margin-bottom: 20px;
+          border: 1px solid #aaa;
+          
+          .btnSet{
+            flex-direction: column;
+            align-items: stretch;
           }
         }
       }

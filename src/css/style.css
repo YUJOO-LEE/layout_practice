@@ -280,7 +280,7 @@ main {
   border: 1px solid #bbb;
   padding: 50px;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
 }
 .community > .inner .listBox article {
   background-color: #fff;
@@ -342,6 +342,50 @@ main {
   background-color: lightgray;
 }
 
+@media screen and (max-width: 1179px) {
+  .community > .inner .inputBox input[type=text],
+.community > .inner .inputBox textarea {
+    width: 100%;
+  }
+  .community > .inner .inputBox .btnSet {
+    width: 100%;
+  }
+  .community > .inner .inputBox .btnSet button {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 539px) {
+  .community > .inner {
+    padding: 0 20px;
+  }
+  .community > .inner .inputBox {
+    border: 0;
+    padding: 0;
+  }
+  .community > .inner .inputBox input[type=text],
+.community > .inner .inputBox textarea {
+    width: 100%;
+  }
+  .community > .inner .inputBox .btnSet {
+    width: 100%;
+  }
+  .community > .inner .inputBox .btnSet button {
+    width: 50%;
+  }
+  .community > .inner .listBox {
+    border: 0;
+    padding: 0;
+  }
+  .community > .inner .listBox article {
+    padding: 40px 20px;
+    margin-bottom: 20px;
+    border: 1px solid #aaa;
+  }
+  .community > .inner .listBox article .btnSet {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
 .department > .inner::after {
   content: "";
   display: block;
