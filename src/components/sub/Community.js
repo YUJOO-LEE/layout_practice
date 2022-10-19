@@ -16,7 +16,6 @@ export default function Community() {
 
   객체의 경우 JSON.stringfy()로 문자열로 변환 후 사용 가능하다.
   만료기간이 없어서 임의로 삭제하지 않는 이상 데이터가 브라우저에 영구적으로 남아있다.
-  
   */
 
   const getLocalData = () => {
@@ -112,7 +111,6 @@ export default function Community() {
   }
 
   useEffect(()=>{
-    console.log(posts);
     localStorage.setItem('post', JSON.stringify(posts));
   }, [posts])
 
