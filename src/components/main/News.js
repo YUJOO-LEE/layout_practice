@@ -25,7 +25,7 @@ export default function News() {
   }, []);
 
   return (
-    <main id='news'>
+    <main id='news' className='myScroll'>
       <h1>News</h1>
       {Posts.map((post, i)=>{
         if(i > 4) return;
