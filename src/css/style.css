@@ -290,8 +290,8 @@ header.main .inner .fa-bars {
 .scrollNavi li {
   width: 15px;
   height: 15px;
+  background-color: transparent;
   border: 1px solid #111;
-  background-color: #fff;
   border-radius: 10px;
   margin: 20px;
   cursor: pointer;
