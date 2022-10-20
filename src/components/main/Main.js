@@ -11,19 +11,34 @@ export default function Main() {
 
   const main = useRef(null);
   const pos = useRef([]);
-  const [ Index, setIndex ] = useState(0);
-  const getPos = () => {
+  const [ Index, setIndex ] = useState(null);
+  const getPos = ()=>{
     pos.current = [];
     const secs = main.current.querySelectorAll('.myScroll');
     for (const sec of secs) {
       pos.current.push(sec.offsetTop);
     }
-    console.log(pos.current);
+  }
+
+  const activation = ()=>{
+    let scroll = window.scrollY || window.pageYOffset;
+    const btns = main.current.querySelectorAll('.scrollNavi li');
+    
+    pos.current.map((top, i)=>{
+      if (scroll >= top - 81) {
+        for (let el of btns) {
+          el.classList.remove('on');
+        }
+        btns[i].classList.add('on');
+      }
+    });
   }
 
   useEffect(()=>{
     getPos();
-    window.addEventListener('resize', getPos)
+    window.addEventListener('resize', getPos);
+    activation();
+    window.addEventListener('scroll', activation);
     
     return (()=>{
       window.removeEventListener('resize', getPos);
