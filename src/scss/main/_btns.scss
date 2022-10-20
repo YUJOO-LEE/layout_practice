@@ -1,0 +1,23 @@
+.scrollNavi{
+  position: fixed;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  z-index: 5;
+
+  li{
+    width: 15px;
+    height: 15px;
+    border: 1px solid #111;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+    
+    &.on{
+      height: 100px;
+      background-color: #111;
+    }
+  }
+}

@@ -4,12 +4,14 @@ import News from './News';
 import Pics from './Pics';
 import Vids from './Vids';
 import Visual from './Visual';
+import Btns from './Btns';
 
 export default function Main() {
 
   const main = useRef(null);
   const pos = useRef([]);
   const getPos = () => {
+    pos.current = [];
     const secs = main.current.querySelectorAll('.myScroll');
     for (const sec of secs) {
       pos.current.push(sec.offsetTop);
@@ -19,6 +21,11 @@ export default function Main() {
 
   useEffect(()=>{
     getPos();
+    window.addEventListener('resize', getPos)
+
+    return (()=>{
+      window.removeEventListener('resize', getPos);
+    });
   }, [])
 
   /*
@@ -38,6 +45,7 @@ export default function Main() {
       <News></News>
       <Pics></Pics>
       <Vids></Vids>
+      <Btns pos={pos}></Btns>
     </main>
   );
 }

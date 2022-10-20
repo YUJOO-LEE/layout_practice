@@ -280,6 +280,28 @@ header.main .inner .fa-bars {
   padding: 10vw;
 }
 
+.scrollNavi {
+  position: fixed;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+.scrollNavi li {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #111;
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.scrollNavi li.on {
+  height: 100px;
+  background-color: #111;
+}
+
 .community > .inner .inputBox {
   width: 100%;
   border: 1px solid #bbb;
