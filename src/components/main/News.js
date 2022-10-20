@@ -8,7 +8,8 @@ export default function News() {
       { title: 'TITLE02', content: "HERE COMES DESCRIPTION IN DETAILS."},
       { title: 'TITLE03', content: "HERE COMES DESCRIPTION IN DETAILS."},
       { title: 'TITLE04', content: "HERE COMES DESCRIPTION IN DETAILS."},
-      { title: 'TITLE05', content: "HERE COMES DESCRIPTION IN DETAILS."}
+      { title: 'TITLE05', content: "HERE COMES DESCRIPTION IN DETAILS."},
+      { title: 'TITLE06', content: "HERE COMES DESCRIPTION IN DETAILS."}
     ]
 
     // 로컬 스토리지 데이터 불러오기
@@ -28,7 +29,7 @@ export default function News() {
     <main id='news' className='myScroll'>
       <h1>News</h1>
       {Posts.map((post, i)=>{
-        if(i > 4) return;
+        if(i > 5) return;
 
         return (
           <article key={i}>

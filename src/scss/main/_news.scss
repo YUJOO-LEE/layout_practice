@@ -15,11 +15,15 @@
     margin-bottom: 20px;
   }
   article{
-    width: 15%;
+    width: 30%;
     min-height: 180px;
+    background-color: #fff;
     border: 1px solid #888;
     padding: 20px;
     margin: 10px;
+    opacity: 0;
+    transform: translateY(100%);
+    transition-duration: 0.5s;
 
     h2{
       font: bold 18px/1 'arial';
@@ -30,6 +34,19 @@
     p{
       font: 14px/1.2 'arial';
       color: #777;
+    }
+  }
+
+  &.on{
+    article{
+      opacity: 1;
+      transform: translateY(0);
+
+      @for $i from 1 through 6 {
+        &:nth-of-type(#{$i}){
+          transition-delay: 0.3s * $i;
+        }
+      }
     }
   }
 }

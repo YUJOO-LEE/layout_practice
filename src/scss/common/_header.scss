@@ -56,6 +56,10 @@ header{
   &.main{
     background-color: #222;
     border-bottom: 1px solid #222;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
 
     .inner{
       h1 a{ color: #fff; }

@@ -13,6 +13,8 @@ export default function Main() {
   const main = useRef(null);
   const pos = useRef([]);
   const [ Index, setIndex ] = useState(null);
+  const [ Scrolled, setScrolled ] = useState(0);
+
   const getPos = ()=>{
     pos.current = [];
     secs = main.current.querySelectorAll('.myScroll');
@@ -25,6 +27,8 @@ export default function Main() {
     const base = window.innerHeight / 2 * -1;
     const scroll = window.scrollY || window.pageYOffset;
     const btns = main.current.querySelectorAll('.scrollNavi li');
+
+    setScrolled(scroll);
     
     pos.current.map((top, i)=>{
       if (scroll >= top + base) {
@@ -70,7 +74,7 @@ export default function Main() {
       <Header type={'main'}></Header>
       <Visual></Visual>
       <News></News>
-      <Pics></Pics>
+      <Pics scrolled={Scrolled} start={pos.current[2]}></Pics>
       <Vids></Vids>
       <Btns setIndex={setIndex} curIndex={Index}></Btns>
     </main>
