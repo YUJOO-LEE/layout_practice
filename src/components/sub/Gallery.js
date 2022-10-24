@@ -3,24 +3,27 @@ import Layout from '../common/Layout';import axios from 'axios';
 import Masonry from 'react-masonry-component';
 
 export default function Gallery() {
-  const key = '67f7c54ac9fe4dd292e245fbb1302b24';
-  const methodInterest = 'flickr.interestingness.getList';
-  const methodSearch = 'flickr.photos.search';
-  const num = 20;
 
-  const interestUrl = `https://www.flickr.com/services/rest/?method=${methodInterest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
-  const searchUrl = `https://www.flickr.com/services/rest/?method=${methodSearch}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&tags=ocean`;
-
-  const masonryOptions = {
-    transitionDuration: '0.5s'
-  }
-
+  const masonryOptions = { transitionDuration: '0.5s' };
   const [ Items, setItems ] = useState([]);
   const [ Loading, setLoading ] = useState(true);
   const [ isClickable, setClickable ] = useState(true);
   const frame = useRef(null);
+  const searchInput = useRef(null);
 
-  const getFlick = async (url)=>{
+  const getFlick = async (option)=>{
+    const key = '67f7c54ac9fe4dd292e245fbb1302b24';
+    const methodInterest = 'flickr.interestingness.getList';
+    const methodSearch = 'flickr.photos.search';
+    const num = 50;
+
+    let url = '';
+    if (option.type === 'interest') {
+      url = `https://www.flickr.com/services/rest/?method=${methodInterest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
+    } else {
+      url = `https://www.flickr.com/services/rest/?method=${methodSearch}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&tags=${option.tags}`;
+    }
+    
     if (!isClickable) return;
     setClickable(false);
     setLoading(true);
@@ -35,8 +38,8 @@ export default function Gallery() {
   }
 
   useEffect(()=>{
-    getFlick(interestUrl);
-  }, [interestUrl]);
+    getFlick({type: 'interest'});
+  }, []);
 
   /*
 
@@ -60,22 +63,33 @@ export default function Gallery() {
       {Loading && 
         <img src={`${process.env.PUBLIC_URL}/img/spinner.gif`} className='loading' alt='' />
       }
-      <button
-        onClick={()=>{
-          frame.current.classList.remove('on');
-          getFlick(interestUrl);
-        }}
-      >
-        Interest Gallery
-      </button>
-      <button
-        onClick={()=>{
-          frame.current.classList.remove('on');
-          getFlick(searchUrl);
-        }}
-      >
-        Search Gallery
-      </button>
+      <div className="controls">
+        <nav>
+          <button
+            onClick={()=>{
+              frame.current.classList.remove('on');
+              getFlick({type: 'interest'});
+            }}
+          >
+            Interest Gallery
+          </button>
+        </nav>
+        <div className="searchBox">
+          <form action="#" onSubmit={(e)=>{
+            e.preventDefault();
+            frame.current.classList.remove('on');
+            const keyword = searchInput.current.value;
+            getFlick({type: 'search', tags: keyword});
+            searchInput.current.value = '';
+          }}>
+            <input type="text"
+              ref={searchInput}
+              placeholder='검색어를 입력하세요' 
+            />
+            <button type='submit'>Search</button>
+          </form>
+        </div>
+      </div>
       
       <div className='frame' ref={frame}>
         <Masonry

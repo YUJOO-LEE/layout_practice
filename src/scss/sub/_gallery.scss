@@ -3,8 +3,10 @@
     position: absolute;
     top: 0;
     left: 50%;
+    z-index: 3;
     transform: translate(-50%);
   }
+
   .frame{
     opacity: 0;
     transform: translateY(200px);
@@ -46,6 +48,56 @@
           color: #777;
           margin-bottom: 30px;
         }
+      }
+    }
+  }
+
+  .controls{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    nav{
+      padding: 10px;
+      display: flex;
+      gap: 20px;
+
+      button{
+        border: 0;
+        width: 130px;
+        height: 30px;
+        background-color: #555;
+        font: 11px/30px 'arial';
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.03);
+      }
+    }
+
+    .searchBox{
+      padding: 10px;
+      font-size: 0;
+      display: flex;
+      
+      input{
+        width: 200px;
+        height: 30px;
+        padding: 3px 5px;
+        border: 1px solid #555;
+        font: 12px/30px 'arial';
+      }
+
+      button{
+        border: none;
+        width: 80px;
+        height: 30px;
+        background-color: #555;
+        font: 12px/30px 'arial';
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 5px 5px 10px rgba(0,0,0,0.03);
       }
     }
   }
