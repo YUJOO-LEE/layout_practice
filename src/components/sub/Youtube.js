@@ -5,16 +5,16 @@ import Popup from '../common/Popup';
 
 export default function Youtube() {
 
-  const key = 'AIzaSyAKqZ1Dx9awi1lCS84qziASeQYZJqLxLSM';
-  const playlist = 'PLtt429gshWMp4G-VhNTFhBzBTd7GOEz-G';
-  const num = 6;  
-  const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playlist}&maxResults=${num}`;
-
   const [videos, setVideos] = useState([]);
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
+    const key = 'AIzaSyAKqZ1Dx9awi1lCS84qziASeQYZJqLxLSM';
+    const playlist = 'PLtt429gshWMp4G-VhNTFhBzBTd7GOEz-G';
+    const num = 6;  
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playlist}&maxResults=${num}`;
+
     axios.get(url).then((json)=>{
       setVideos(json.data.items);
     })
@@ -47,7 +47,7 @@ export default function Youtube() {
         })}
       </Layout>
       { open && <Popup setOpen={setOpen}>
-        <iframe src={`https://www.youtube.com/embed/${videos[index].snippet.resourceId.videoId}`} frameBorder="0"></iframe>
+        <iframe title={videos[index].snippet.title} src={`https://www.youtube.com/embed/${videos[index].snippet.resourceId.videoId}`} frameBorder="0"></iframe>
       </Popup> }
     </>
   );

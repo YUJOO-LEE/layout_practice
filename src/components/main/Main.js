@@ -9,38 +9,41 @@ import Anime from '../../asset/anime';
 
 export default function Main() {
 
-  let secs;
   const main = useRef(null);
   const pos = useRef([]);
   const [ Index, setIndex ] = useState(null);
   const [ Scrolled, setScrolled ] = useState(0);
 
-  const getPos = ()=>{
-    pos.current = [];
-    secs = main.current.querySelectorAll('.myScroll');
-    for (const sec of secs) {
-      pos.current.push(sec.offsetTop);
-    }
-  }
-
-  const activation = ()=>{
-    const base = window.innerHeight / 2 * -1;
-    const scroll = window.scrollY || window.pageYOffset;
-    const btns = main.current.querySelectorAll('.scrollNavi li');
-
-    setScrolled(scroll);
-    
-    pos.current.map((top, i)=>{
-      if (scroll >= top + base) {
-        for (let el of btns) el.classList.remove('on');
-        for (let sec of secs) sec.classList.remove('on');
-        secs[i].classList.add('on');
-        btns[i].classList.add('on');
-      }
-    });
-  }
 
   useEffect(()=>{
+
+    let secs;
+    const getPos = ()=>{
+      pos.current = [];
+      secs = main.current.querySelectorAll('.myScroll');
+      for (const sec of secs) {
+        pos.current.push(sec.offsetTop);
+      }
+    }
+
+    const activation = ()=>{
+      const base = window.innerHeight / 2 * -1;
+      const scroll = window.scrollY || window.pageYOffset;
+      const btns = main.current.querySelectorAll('.scrollNavi li');
+
+      setScrolled(scroll);
+      
+      pos.current.map((top, i)=>{
+        if (scroll >= top + base) {
+          for (let el of btns) el.classList.remove('on');
+          for (let sec of secs) sec.classList.remove('on');
+          secs[i].classList.add('on');
+          btns[i].classList.add('on');
+        }
+        return false;
+      });
+    }
+    
     getPos();
     window.addEventListener('resize', getPos);
     activation();

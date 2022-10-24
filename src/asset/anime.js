@@ -17,10 +17,10 @@ export default class Anime {
 			const y = ['margin-top', 'margin-bottom', 'top', 'bottom', 'height'];
 
 			for (let condition of x) {
-				if (this.option.prop == condition) this.currentValue = (this.currentValue / parentW) * 100;
+				if (this.option.prop === condition) this.currentValue = (this.currentValue / parentW) * 100;
 			}
 			for (let condition of y) {
-				if (this.option.prop == condition) this.currentValue = (this.currentValue / parentH) * 100;
+				if (this.option.prop === condition) this.currentValue = (this.currentValue / parentH) * 100;
 			}
 			this.option.value = parseFloat(this.option.value);
 		}

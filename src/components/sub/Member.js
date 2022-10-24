@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import Layout from '../common/Layout';
 
 export default function Member() {
 
-  const history = useHistory();
+  const history = useRef(useHistory());
   /*
     useHistory : URL 주소를 변경할 때 사용하는 Hook
     - 리액트는 url변경 없이 컴포넌트만 변경시킬 수 있지만
@@ -125,7 +125,7 @@ export default function Member() {
       alert('회원 가입이 완료되었습니다. 메인 페이지로 이동합니다');
       history.push('/youtube');
     };
-  }, [])
+  }, [err, submit])
   
 
   return (

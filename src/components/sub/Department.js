@@ -1,9 +1,9 @@
 import Layout from '../common/Layout';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Department() {
-  const path = process.env.PUBLIC_URL;
+  const path = useRef(process.env.PUBLIC_URL);
   const [Members, setMembers] = useState([]);
 
   useEffect(() => {

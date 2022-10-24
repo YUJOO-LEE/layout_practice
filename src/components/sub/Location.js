@@ -4,7 +4,8 @@ import { useEffect, useState, useRef } from 'react';
 
 export default function Location() {
   const { kakao } = window;
-  const info = [
+  let info = useRef([]);
+  info = [
     {
       title: '디코드랩',
       latLng: new kakao.maps.LatLng(37.491317,126.751998),
@@ -31,22 +32,23 @@ export default function Location() {
   const [ isTraffic, setTraffic ] = useState(false);
   const [ location, setLocation ] = useState(null);
   const [ index, setIndex ] = useState(0);
-  const option = {
-    center: info[index].latLng,
-    lever: 3
-  };
-
-  const marker = new kakao.maps.Marker({
-    position: info[index].latLng,
-    image: new kakao.maps.MarkerImage(
-      info[index].imgSrc,
-      info[index].imgSize,
-      info[index].imgPos
-      )
-  })
 
   useEffect(() => {
-    const mapInstance = new kakao.maps.Map(container.current, option);
+    const con = container.current;
+    const option = {
+      center: info[index].latLng,
+      lever: 3
+    };
+    const marker = new kakao.maps.Marker({
+      position: info[index].latLng,
+      image: new kakao.maps.MarkerImage(
+        info[index].imgSrc,
+        info[index].imgSize,
+        info[index].imgPos
+        )
+    })
+    
+    const mapInstance = new kakao.maps.Map(con, option);
     const zoomControl = new kakao.maps.ZoomControl();
     mapInstance.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
@@ -54,9 +56,9 @@ export default function Location() {
     setLocation(mapInstance);
   
     return () => {
-      container.current.innerHTML = '';
+      con.innerHTML = '';
     }
-  }, [index])
+  }, [index, kakao])
 
   useEffect(() => {
     if (!location) return;
@@ -64,7 +66,7 @@ export default function Location() {
     isTraffic
       ? location.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC)
       : location.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC)
-  }, [isTraffic])
+  }, [isTraffic, kakao, location])
   
 
   window.addEventListener('resize', ()=>{

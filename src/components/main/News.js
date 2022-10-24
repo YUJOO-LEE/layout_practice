@@ -23,13 +23,13 @@ export default function News() {
 
   useEffect(()=>{
     localStorage.setItem('post',JSON.stringify(Posts));
-  }, []);
+  }, [Posts]);
 
   return (
     <main id='news' className='myScroll'>
       <h1>News</h1>
       {Posts.map((post, i)=>{
-        if(i > 5) return;
+        if(i > 5) return false;
 
         return (
           <article key={i}>

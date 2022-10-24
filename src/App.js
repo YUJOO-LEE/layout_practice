@@ -1,4 +1,4 @@
-import './css/style.css';
+import './scss/style.scss';
 import { Route, Switch } from 'react-router-dom';
 
 // common
