@@ -16,12 +16,17 @@ export default function Gallery() {
   }
 
   const [ Items, setItems ] = useState([]);
+  const [ Loading, setLoading ] = useState(true);
   const frame = useRef(null);
 
   async function getFlick(url) {
+    setLoading(true);
     const result = await axios.get(url);
     setItems(result.data.photos.photo);
-    frame.current.classList.add('on');
+    setTimeout(() => {
+      setLoading(false);
+      frame.current.classList.add('on');
+    }, 500);
   }
 
   useEffect(()=>{
@@ -47,6 +52,9 @@ export default function Gallery() {
 
   return (
     <Layout name='gallery'>
+      {Loading && 
+        <img src={`${process.env.PUBLIC_URL}/img/spinner.gif`} className='loading' alt='' />
+      }
       <button
         onClick={()=>{
           frame.current.classList.remove('on');
