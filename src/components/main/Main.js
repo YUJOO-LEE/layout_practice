@@ -16,7 +16,6 @@ export default function Main() {
 
 
   useEffect(()=>{
-
     let secs;
     const getPos = ()=>{
       pos.current = [];
