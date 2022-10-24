@@ -45,7 +45,7 @@
     figure{
       height: 200px;
     }
-    .inner{
+    >.inner{
       width: 100%; 
       min-height: calc(100vh - 200px - 100px - 150px);
       // figure 200, header+footer 100, margin 150
