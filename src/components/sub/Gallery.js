@@ -20,13 +20,13 @@ export default function Gallery() {
   const [ isClickable, setClickable ] = useState(true);
   const frame = useRef(null);
 
-  async function getFlick(url) {
+  const getFlick = async (url)=>{
     if (!isClickable) return;
     setClickable(false);
     setLoading(true);
     const result = await axios.get(url);
     setItems(result.data.photos.photo);
-    
+
     setTimeout(() => {
       setLoading(false);
       frame.current.classList.add('on');
