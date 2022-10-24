@@ -1,26 +1,32 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import Layout from '../common/Layout';
+import { useEffect, useRef, useState } from 'react';
+import Layout from '../common/Layout';import axios from 'axios';
+import Masonry from 'react-masonry-component';
 
 export default function Gallery() {
   const key = '67f7c54ac9fe4dd292e245fbb1302b24';
   const methodInterest = 'flickr.interestingness.getList';
-  //const methodSearch = 'flickr.photos.search';
+  const methodSearch = 'flickr.photos.search';
   const num = 20;
-  const url = `https://www.flickr.com/services/rest/?method=${methodInterest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
+
+  const interestUrl = `https://www.flickr.com/services/rest/?method=${methodInterest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
+  const searchUrl = `https://www.flickr.com/services/rest/?method=${methodSearch}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&tags=ocean`;
+
+  const masonryOptions = {
+    transitionDuration: '0.5s'
+  }
+
   const [ Items, setItems ] = useState([]);
+  const frame = useRef(null);
+
+  async function getFlick(url) {
+    const result = await axios.get(url);
+    setItems(result.data.photos.photo);
+    frame.current.classList.add('on');
+  }
 
   useEffect(()=>{
-    async function getPhotos() {
-      const result = await axios.get(url);
-      setItems(result.data.photos.photo);
-    }
-    getPhotos();
-  }, [])
-
-  useEffect(()=>{
-    console.log(Items);
-  }, [Items])
+    getFlick(interestUrl);
+  }, [interestUrl]);
 
   /*
 
@@ -41,7 +47,42 @@ export default function Gallery() {
 
   return (
     <Layout name='gallery'>
-      <article></article>
+      <button
+        onClick={()=>{
+          frame.current.classList.remove('on');
+          getFlick(interestUrl);
+        }}
+      >
+        Interest Gallery
+      </button>
+      <button
+        onClick={()=>{
+          frame.current.classList.remove('on');
+          getFlick(searchUrl);
+        }}
+      >
+        Search Gallery
+      </button>
+      
+      <div className='frame' ref={frame}>
+        <Masonry
+          elementType={'div'}
+          options={masonryOptions}
+        >
+        {Items.map((item, idx)=>{
+          return (
+            <article key={idx}>
+              <div className='inner'>
+                <div className='pic'>
+                  <img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
+                </div>
+                <h2>{item.title}</h2>
+              </div>
+            </article>
+          );
+        })}
+        </Masonry>
+      </div>
     </Layout>
   );
 }
