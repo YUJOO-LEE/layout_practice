@@ -1,13 +1,13 @@
 import Layout from '../common/Layout';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Popup from '../common/Popup';
 
 export default function Youtube() {
 
   const [videos, setVideos] = useState([]);
-  const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
+  const pop = useRef(null);
 
   useEffect(() => {
     const key = 'AIzaSyAKqZ1Dx9awi1lCS84qziASeQYZJqLxLSM';
@@ -39,16 +39,18 @@ export default function Youtube() {
                 <p>{description}</p>
                 <span>{date}</span>
               </div>
-              <div className="pic" onClick={()=>{ setOpen(true); setIndex(index)}}>
+              <div className="pic" onClick={()=>{ pop.current.setOpen(true); setIndex(index)}}>
                 <img src={data.snippet.thumbnails.standard.url} alt={data.snippet.title} />
               </div>
             </article>
           );
         })}
       </Layout>
-      { open && <Popup setOpen={setOpen}>
-        <iframe title={videos[index].snippet.title} src={`https://www.youtube.com/embed/${videos[index].snippet.resourceId.videoId}`} frameBorder="0"></iframe>
-      </Popup> }
+      <Popup ref={pop}>
+        {videos.length > 0 && 
+          <iframe title={videos[index].snippet.title} src={`https://www.youtube.com/embed/${videos[index].snippet.resourceId.videoId}`} frameBorder="0"></iframe>
+        }
+      </Popup>
     </>
   );
 }

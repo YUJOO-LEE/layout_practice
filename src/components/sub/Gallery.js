@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Layout from '../common/Layout';import axios from 'axios';
 import Masonry from 'react-masonry-component';
+import Popup from '../common/Popup';
 
 export default function Gallery() {
 
@@ -8,8 +9,11 @@ export default function Gallery() {
   const [ Items, setItems ] = useState([]);
   const [ Loading, setLoading ] = useState(true);
   const [ isClickable, setClickable ] = useState(true);
+  const [ index, setIndex ] = useState(0);
+  
   const frame = useRef(null);
   const searchInput = useRef(null);
+  const pop = useRef(null);
 
   // 데이터 받아오기
   const getFlickr = async (option)=>{
@@ -58,7 +62,7 @@ export default function Gallery() {
 
   // 기본 데이터 interest로 뿌려주기
   useEffect(()=>{
-    getFlickr({type: 'interest'});
+    getFlickr({type: 'user', userid: '196649511@N03'});
   }, []);
 
   /*
@@ -79,6 +83,7 @@ export default function Gallery() {
   */
 
   return (
+    <>
     <Layout name='gallery'>
       {Loading && 
         <img src={`${process.env.PUBLIC_URL}/img/spinner.gif`} className='loading' alt='' />
@@ -92,6 +97,14 @@ export default function Gallery() {
             }}
           >
             Interest Gallery
+          </button>
+          <button
+            onClick={()=>{
+              frame.current.classList.remove('on');
+              getFlickr({type: 'user', userid: '196649511@N03'});
+            }}
+          >
+            My Gallery
           </button>
         </nav>
         <div className="searchBox">
@@ -114,7 +127,10 @@ export default function Gallery() {
           return (
             <article key={idx}>
               <div className='inner'>
-                <div className='pic'>
+                <div className='pic' onClick={()=>{
+                  pop.current.setOpen();
+                  setIndex(idx);
+                  }}>
                   <img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} alt={item.title} />
                 </div>
                 <h2>{item.title}</h2>
@@ -136,5 +152,12 @@ export default function Gallery() {
         </Masonry>
       </div>
     </Layout>
+
+    <Popup ref={pop}>
+      {Items.length > 0 &&
+        <img src={`https://live.staticflickr.com/${Items[index].server}/${Items[index].id}_${Items[index].secret}_b.jpg`} alt={Items[index].title} />
+      }
+    </Popup>
+  </>
   );
 }
