@@ -18,13 +18,8 @@ const Popup = forwardRef((props, ref)=>{
     } else {
       document.body.style.overflow = 'auto';
     }
-
-    return (()=>{
-      document.body.style.overflow = 'auto';
-    })
-  }, [open])
+  }, [open]);
   
-
   return (
     <>
     {open && 
