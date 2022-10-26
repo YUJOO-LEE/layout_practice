@@ -1,4 +1,6 @@
+import React from 'react';
 import { forwardRef, useEffect, useState, useImperativeHandle } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Popup = forwardRef((props, ref)=>{
   const [open, setOpen] = useState(false);
@@ -21,14 +23,26 @@ const Popup = forwardRef((props, ref)=>{
   }, [open]);
   
   return (
-    <>
+    <AnimatePresence>
     {open && 
-      <aside className='pop'>
-        <div className='con'>{props.children}</div>
-        <span className='close' onClick={()=>{ setOpen(false)}}>close</span>
-      </aside>
+      <motion.aside className='pop' 
+        initial={{opacity: 0}} 
+        animate={{opacity: 1}} 
+        exit={{opacity: 0, transition: {delay: 0.5}}}
+      >
+        <motion.div
+          initial={{opacity: 0}}
+          animate={{opacity: 1, transition: {duration: 0.5, delay: 0.5}}}
+          exit={{opacity: 0, transition: {delay: 0}}}
+          className='con'>{props.children}</motion.div>
+        <motion.span 
+          initial={{x: 50, opacity: 0}}
+          animate={{x: 0, opacity: 1, transition: {delay: 1}}}
+          className='close' onClick={()=>{setOpen(false)}}
+        >close</motion.span>
+      </motion.aside>
     }
-    </>
+    </AnimatePresence>
   );
 });
 export default Popup;
