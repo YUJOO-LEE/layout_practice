@@ -3,11 +3,11 @@ import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 
 export default function Department() {
-  const path = useRef(process.env.PUBLIC_URL);
+  //const path = useRef(process.env.PUBLIC_URL);
   const [Members, setMembers] = useState([]);
 
   useEffect(() => {
-    axios.get(`${path}/db/members.json`).then((json)=>{
+    axios.get(`${process.env.PUBLIC_URL}/db/members.json`).then((json)=>{
       setMembers(json.data.members);
     })
   }, [])
@@ -23,7 +23,7 @@ export default function Department() {
         <article key={index}>
           <div className="inner">
             <div className="pic">
-              <img src={`${path}/img/${data.pic}`} alt={data.name} />
+              <img src={`${process.env.PUBLIC_URL}/img/${data.pic}`} alt={data.name} />
             </div>
             <h3>{data.name}</h3>
             <p>{data.position}</p>

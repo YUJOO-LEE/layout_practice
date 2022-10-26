@@ -1,10 +1,13 @@
-import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
-import { faBars } from '@fortawesome/free-solid-svg-icons' 
+import { useRef } from 'react';
+import { NavLink, Link, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import Menu from './Menu';
 
 
 export default function Header(props) {
+
+  const menu = useRef(null);
   const active = { color: 'orange' };
   const baseUrl = process.env.PUBLIC_URL;
   let logoUrl = '';
@@ -52,8 +55,9 @@ export default function Header(props) {
             </NavLink>
           </li>
         </ul>
-        <FontAwesomeIcon icon={faBars} />
+        <FontAwesomeIcon icon={faBars} onClick={()=>{menu.current.toggle()}}/>
       </div>
+      <Menu ref={menu}></Menu>
     </header>
   );
 }

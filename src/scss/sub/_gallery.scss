@@ -64,6 +64,7 @@
             cursor: pointer;
             font-size: 12px;
             transition: 0.5s;
+            word-wrap: break-word;
 
             &:hover{
               color: orangered;

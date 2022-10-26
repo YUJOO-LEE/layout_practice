@@ -10,5 +10,44 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <div class="defaults"></div>
+    <div class="mask"></div>
+
+    <script>
+      const defaults = document.querySelector('.defaults');
+      const mask = document.querySelector('.mask');
+      let tags = '';
+      const baseUrl = 'https://leeyujoo.com/layout_practice/img/';
+      const imgs = [
+        baseUrl+'Community.jpg',
+        baseUrl+'Department.jpg',
+        baseUrl+'Gallery.jpg',
+        baseUrl+'Location.jpg',
+        baseUrl+'Member.jpg',
+        baseUrl+'Youtube.jpg',
+      ]
+      const vids= [
+        baseUrl+'vid1.mp4',
+      ]
+
+      function createDOM() {
+        imgs.forEach(src=>tags+=`<img src=${src} />`);
+        vids.forEach(src=>tags+=`<video src=${src}></video>`);
+        defaults.innerHTML = tags;
+      }
+    </script>
   </body>
 </html>
+
+<!-- 
+  SSR : server side rendering
+    페이지 이동 시 일일이 HTML 파일을 서버로부터 불러오는 방식 
+  - 초기 로딩 속도가 빠르다.
+  - SEO 최적화에 유리하다.
+
+  CSR : client side rendering
+    초기 페이지 로딩 시 모든 컴포넌트(JSX) 파일을 한번에 불러오는 방식
+  - 한번 데이터를 가져온 이후 페이지 이동 시 전환 로딩이 없다.
+  - 초기 로딩 속도가 상대적으로 길다.
+  - SEO 최적화에 취약하다.
+ -->
