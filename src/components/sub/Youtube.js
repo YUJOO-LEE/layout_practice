@@ -7,10 +7,11 @@ import { setYoutube } from '../../redux/action';
 
 export default function Youtube() {
 
-  const [index, setIndex] = useState(0);
-  const pop = useRef(null);
   const dispatch = useDispatch();
   const vids = useSelector(store => store.youtubeReducer.youtube);
+  // 최초 렌더링 시 store는 초기값인 빈 배열이다가 렌더 후 store에 담겨서 변화됨
+  const [index, setIndex] = useState(0);
+  const pop = useRef(null);
 
   useEffect(() => {
     const key = 'AIzaSyAKqZ1Dx9awi1lCS84qziASeQYZJqLxLSM';
@@ -22,11 +23,13 @@ export default function Youtube() {
       dispatch(setYoutube(json.data.items));
     })
   }, [])
+  // 최초 렌더링 후 store에 youtube 데이터가 저장됨
 
+  // 초기값을 배열로 넣어주었으므로 옵셔널 체이닝 불필요
   return (
     <>
       <Layout name='youtube'>
-        {vids?.map((data, index)=>{
+        {vids.map((data, index)=>{
           let title = data.snippet.title;
           let description = data.snippet.description;
           let date = data.snippet.publishedAt;
@@ -50,7 +53,7 @@ export default function Youtube() {
         })}
       </Layout>
       <Popup ref={pop}>
-        {vids?.length > 0 && 
+        {vids.length > 0 && 
           <iframe title={vids[index].snippet.title} src={`https://www.youtube.com/embed/${vids[index].snippet.resourceId.videoId}`} frameBorder="0"></iframe>
         }
       </Popup>
