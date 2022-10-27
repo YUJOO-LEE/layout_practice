@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Header from '../common/Header'
 import News from './News';
+import Members from './Members';
 import Pics from './Pics';
 import Vids from './Vids';
 import Visual from './Visual';
@@ -19,7 +20,7 @@ export default function Main() {
     let secs;
     const getPos = ()=>{
       pos.current = [];
-      secs = main.current.querySelectorAll('.myScroll');
+      secs = main.current?.querySelectorAll('.myScroll');
       for (const sec of secs) {
         pos.current.push(sec.offsetTop);
       }
@@ -28,7 +29,7 @@ export default function Main() {
     const activation = ()=>{
       const base = window.innerHeight / 2 * -1;
       const scroll = window.scrollY || window.pageYOffset;
-      const btns = main.current.querySelectorAll('.scrollNavi li');
+      const btns = main.current?.querySelectorAll('.scrollNavi li');
 
       setScrolled(scroll);
       
@@ -76,7 +77,8 @@ export default function Main() {
       <Header type={'main'}></Header>
       <Visual></Visual>
       <News></News>
-      <Pics scrolled={Scrolled} start={pos.current[2]}></Pics>
+      <Members></Members>
+      <Pics scrolled={Scrolled} start={pos.current[3]}></Pics>
       <Vids></Vids>
       <Btns setIndex={setIndex} curIndex={Index}></Btns>
     </main>

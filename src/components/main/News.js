@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 export default function News() {
-
-  const Members = useSelector((store)=>{
-    return (store.memberReducer.members);
-  });
 
   const getLocalData = () => {
     const dummyPosts = [
@@ -33,19 +28,14 @@ export default function News() {
   return (
     <main id='news' className='myScroll'>
       <h1>News</h1>
-      {Posts.map((post, i)=>{
-        if(i > 5) return false;
+      {Posts.map((post, idx)=>{
+        if(idx > 5) return false;
 
         return (
-          <article key={i}>
+          <article key={idx}>
             <h2>{post.title}</h2>
             <p>{post.content}</p>
           </article>
-        );
-      })}
-      {Members.map((member)=>{
-        return (
-          <p>{member.name}</p>
         );
       })}
     </main>

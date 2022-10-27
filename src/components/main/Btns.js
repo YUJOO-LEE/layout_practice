@@ -13,6 +13,9 @@ export default function Btns(props) {
       <li
         onClick={()=>props.setIndex(3)}
       ></li>
+      <li
+        onClick={()=>props.setIndex(4)}
+      ></li>
     </ul>
   );
 }

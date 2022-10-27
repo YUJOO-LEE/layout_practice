@@ -6,10 +6,11 @@ export default function Pics(props) {
   const pics = useRef(null);
   //const picsWidth = pics.current?.offsetWidth;
   const picsHeight = window.innerHeight;
+  const docHeight = document.innerHeight;
 
   return (
     <main id='pics' className='myScroll' ref={pics}>
-      <h1 style={{left: position / picsHeight * 200 + '%', opacity: position / picsHeight + 1}}>FLICKR</h1>
+      <h1 style={{left: Math.max(position / picsHeight * 200, 100) + '%', opacity: position / picsHeight + 1}}>FLICKR</h1>
       <h2 style={{top: position / picsHeight * 200 + '%', opacity: position / picsHeight + 1}}>{position}, {picsHeight}</h2>
       <p style={{left: position}}></p>
     </main>
