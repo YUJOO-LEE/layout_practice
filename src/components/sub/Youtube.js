@@ -1,29 +1,15 @@
 import Layout from '../common/Layout';
-import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Popup from '../common/Popup';
-import { useDispatch, useSelector } from 'react-redux';
-import { setYoutube } from '../../redux/action';
+import { useSelector } from 'react-redux';
 
 export default function Youtube() {
 
-  const dispatch = useDispatch();
   const vids = useSelector(store => store.youtubeReducer.youtube);
   // 최초 렌더링 시 store는 초기값인 빈 배열이다가 렌더 후 store에 담겨서 변화됨
   const [index, setIndex] = useState(0);
   const pop = useRef(null);
 
-  useEffect(() => {
-    const key = 'AIzaSyAKqZ1Dx9awi1lCS84qziASeQYZJqLxLSM';
-    const playlist = 'PLtt429gshWMp4G-VhNTFhBzBTd7GOEz-G';
-    const num = 6;  
-    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playlist}&maxResults=${num}`;
-
-    axios.get(url).then((json)=>{
-      dispatch(setYoutube(json.data.items));
-    })
-  }, [])
-  // 최초 렌더링 후 store에 youtube 데이터가 저장됨
 
   // 초기값을 배열로 넣어주었으므로 옵셔널 체이닝 불필요
   return (
