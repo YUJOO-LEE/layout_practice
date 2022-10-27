@@ -63,6 +63,9 @@ export default function Gallery() {
   // 기본 데이터 interest로 뿌려주기
   useEffect(()=>{
     getFlickr({type: 'user', userid: '196649511@N03'});
+    return(()=>{
+      getFlickr(null);
+    })
   }, []);
 
   /*
