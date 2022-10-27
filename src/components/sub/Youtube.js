@@ -2,12 +2,15 @@ import Layout from '../common/Layout';
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
 import Popup from '../common/Popup';
+import { useDispatch, useSelector } from 'react-redux';
+import { setYoutube } from '../../redux/action';
 
 export default function Youtube() {
 
-  const [videos, setVideos] = useState([]);
   const [index, setIndex] = useState(0);
   const pop = useRef(null);
+  const dispatch = useDispatch();
+  const vids = useSelector(store => store.youtubeReducer.youtube);
 
   useEffect(() => {
     const key = 'AIzaSyAKqZ1Dx9awi1lCS84qziASeQYZJqLxLSM';
@@ -16,14 +19,14 @@ export default function Youtube() {
     const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playlist}&maxResults=${num}`;
 
     axios.get(url).then((json)=>{
-      setVideos(json.data.items);
+      dispatch(setYoutube(json.data.items));
     })
   }, [])
 
   return (
     <>
       <Layout name='youtube'>
-        {videos.map((data, index)=>{
+        {vids?.map((data, index)=>{
           let title = data.snippet.title;
           let description = data.snippet.description;
           let date = data.snippet.publishedAt;
@@ -47,8 +50,8 @@ export default function Youtube() {
         })}
       </Layout>
       <Popup ref={pop}>
-        {videos.length > 0 && 
-          <iframe title={videos[index].snippet.title} src={`https://www.youtube.com/embed/${videos[index].snippet.resourceId.videoId}`} frameBorder="0"></iframe>
+        {vids?.length > 0 && 
+          <iframe title={vids[index].snippet.title} src={`https://www.youtube.com/embed/${vids[index].snippet.resourceId.videoId}`} frameBorder="0"></iframe>
         }
       </Popup>
     </>
