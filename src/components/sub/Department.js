@@ -1,10 +1,11 @@
 import Layout from '../common/Layout';
-import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+
 
 export default function Department() {
   //const path = useRef(process.env.PUBLIC_URL);
-  const [Members, setMembers] = useState([]);
+
+  const Members = useSelector((store)=> store.memberReducer.members);
 
   /*
   useEffect(() => {
@@ -13,10 +14,6 @@ export default function Department() {
     })
   }, [])
   */
-
-  useEffect(() => {
-    console.log(Members);
-  }, [Members])
 
   return (
     <Layout name='department'>

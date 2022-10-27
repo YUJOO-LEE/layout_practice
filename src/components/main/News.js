@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function News() {
+
+  const Members = useSelector((store)=>{
+    return (store.memberReducer.members);
+  });
 
   const getLocalData = () => {
     const dummyPosts = [
@@ -36,6 +41,11 @@ export default function News() {
             <h2>{post.title}</h2>
             <p>{post.content}</p>
           </article>
+        );
+      })}
+      {Members.map((member)=>{
+        return (
+          <p>{member.name}</p>
         );
       })}
     </main>
