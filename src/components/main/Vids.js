@@ -6,10 +6,9 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 export default function Vids() {
-
   const Vids = useSelector((store)=>{
-  return (store.youtubeReducer.youtube);
-});
+    return (store.youtubeReducer.youtube);
+  });
 
   return (
     <main id='vids' className='myScroll'>
