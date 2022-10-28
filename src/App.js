@@ -17,6 +17,7 @@ import Gallery from './components/sub/Gallery';
 import Member from './components/sub/Member';
 import Location from './components/sub/Location';
 import Youtube from './components/sub/Youtube';
+import * as types from './redux/actionType';
 
 
 function App() {
@@ -24,14 +25,14 @@ function App() {
 
   useEffect(() => {
     dispatch({
-      type: 'MEMBERS_START',
+      type: types.MEMBERS.start,
     });
     dispatch({
-      type: 'FLICKR_START',
+      type: types.FLICKR.start,
       Option: {type: 'interest'}
     });
     dispatch({
-      type: 'YOUTUBE_START',
+      type: types.YOUTUBE.start,
     });
   }, [])
   // 최초 렌더링 후 store에 youtube 데이터가 저장됨

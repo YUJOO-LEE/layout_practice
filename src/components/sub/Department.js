@@ -1,6 +1,5 @@
 import Layout from '../common/Layout';
 import { useSelector, useDispatch } from 'react-redux';
-import { setMembers } from '../../redux/action';
 
 
 export default function Department() {
@@ -20,14 +19,6 @@ export default function Department() {
 
   return (
     <Layout name='department'>
-    <button onClick={()=>{
-      const newMembers = [...Members];
-      newMembers[0].name = 'Emma';
-      // 새로운 데이터를 액션 생성 함수로 넣어서
-      // 생성한 객체를dispatch에 의해서 리듀서에 전달
-      dispatch(setMembers(newMembers));
-    }}>멤버 수정</button><br />
-    
       {Members.map((data, index)=>{
 
         return (

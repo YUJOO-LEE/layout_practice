@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import Layout from '../common/Layout';import axios from 'axios';
+import Layout from '../common/Layout';
 import Masonry from 'react-masonry-component';
 import Popup from '../common/Popup';
 import { useSelector, useDispatch } from 'react-redux';
+import * as types from '../../redux/actionType';
 
 export default function Gallery() {
 
@@ -87,7 +88,7 @@ export default function Gallery() {
   // Option state값이 변경될때마다 해당 구문 호출
   // dispatch로 saga에 'FLICKR_START'라는 액션타입으로 Option 정보값을 전달
   useEffect(()=>{
-    dispatch({type: 'FLICKR_START', Option});
+    dispatch({type: types.FLICKR.start, Option});
   }, [Option]);
 
   useEffect(()=>{
