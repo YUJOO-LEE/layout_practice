@@ -2,8 +2,6 @@ import './scss/style.scss';
 import { Route, Switch } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setYoutube, setMembers } from './redux/action';
-import axios from 'axios';
 
 // common
 import Footer from './components/common/Footer';
@@ -24,25 +22,17 @@ import Youtube from './components/sub/Youtube';
 function App() {
   const dispatch = useDispatch();
 
-  const getMembers = async ()=>{
-    const url = `${process.env.PUBLIC_URL}/db/members.json`;
-    const result = await axios.get(url);
-    dispatch(setMembers(result.data.members));
-  }
-
-  const getYoutube = async ()=>{
-    const key = 'AIzaSyAKqZ1Dx9awi1lCS84qziASeQYZJqLxLSM';
-    const playlist = 'PLtt429gshWMp4G-VhNTFhBzBTd7GOEz-G';
-    const num = 6;  
-    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playlist}&maxResults=${num}`;
-
-    const result = await axios.get(url);
-    dispatch(setYoutube(result.data.items));
-  }
-
   useEffect(() => {
-    getMembers();
-    getYoutube();
+    dispatch({
+      type: 'MEMBERS_START',
+    });
+    dispatch({
+      type: 'FLICKR_START',
+      Option: {type: 'interest'}
+    });
+    dispatch({
+      type: 'YOUTUBE_START',
+    });
   }, [])
   // 최초 렌더링 후 store에 youtube 데이터가 저장됨
 

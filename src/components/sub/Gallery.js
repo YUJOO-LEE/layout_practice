@@ -2,11 +2,16 @@ import { useEffect, useRef, useState } from 'react';
 import Layout from '../common/Layout';import axios from 'axios';
 import Masonry from 'react-masonry-component';
 import Popup from '../common/Popup';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Gallery() {
 
+	const dispatch = useDispatch();
+	//store 부터 전역 flickr데이터를 가져옴
+	const Items = useSelector(store => store.flickrReducer.flickr);
+
+  const [ Option, setOption ] = useState({type: 'interest'});
   const masonryOptions = { transitionDuration: '0.5s' };
-  const [ Items, setItems ] = useState([]);
   const [ Loading, setLoading ] = useState(true);
   const [ isClickable, setClickable ] = useState(true);
   const [ index, setIndex ] = useState(0);
@@ -15,39 +20,12 @@ export default function Gallery() {
   const searchInput = useRef(null);
   const pop = useRef(null);
 
-  // 데이터 받아오기
-  const getFlickr = async (option)=>{
-    const key = '67f7c54ac9fe4dd292e245fbb1302b24';
-    const methodInterest = 'flickr.interestingness.getList';
-    const methodSearch = 'flickr.photos.search';
-    const methodUser = 'flickr.people.getPhotos';
-    const num = 50;
-
-    let url = '';
-    if (option.type === 'interest') {
-      url = `https://www.flickr.com/services/rest/?method=${methodInterest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
-    } else if (option.type === 'search') {
-      url = `https://www.flickr.com/services/rest/?method=${methodSearch}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&tags=${option.tags}`;
-    } else if (option.type === 'user') {
-      url = `https://www.flickr.com/services/rest/?method=${methodUser}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&user_id=${option.userid}`;
-    }
-    
-    if (!isClickable) return;
-    setClickable(false);
-    setLoading(true);
-    const result = await axios.get(url);
-    setItems(result.data.photos.photo);
-
-    setTimeout(() => {
-      setLoading(false);
-      frame.current.classList.add('on');
-      setClickable(true);
-    }, 500);
-  }
-
   // 검색창 submit 처리
   const showSearch = (e)=>{
     e.preventDefault();
+    if (!isClickable) return;
+    setClickable(false);
+    setLoading(true);
     const keyword = searchInput.current.value.trim();
     if (!keyword) {
       searchInput.current.style.border = '2px solid red';
@@ -56,17 +34,9 @@ export default function Gallery() {
       searchInput.current.style.border = '';
     }
     frame.current.classList.remove('on');
-    getFlickr({type: 'search', tags: keyword});
+    setOption({type: 'search', tags: keyword});
     searchInput.current.value = '';
   };
-
-  // 기본 데이터 interest로 뿌려주기
-  useEffect(()=>{
-    getFlickr({type: 'user', userid: '196649511@N03'});
-    return(()=>{
-      getFlickr(null);
-    })
-  }, []);
 
   /*
 
@@ -85,6 +55,49 @@ export default function Gallery() {
 
   */
 
+
+  // interest 리스트 출력
+  const showInterest = ()=>{
+    if (!isClickable) return;
+    setClickable(false);
+    setLoading(true);
+		frame.current.classList.remove('on');
+    setOption({type: 'interest'});
+  };
+
+  // user별 리스트 출력
+  const showUser = (userId)=>{
+    if (!isClickable) return;
+    setClickable(false);
+    setLoading(true);
+    frame.current.classList.remove('on');
+    setOption({type: 'user', userid: userId});
+  };
+
+  // 기본 데이터 interest로 뿌려주기
+  useEffect(()=>{
+    setOption({type: 'interest'});
+
+    // // 언마운트시 cleanup
+    // return(()=>{
+    //   setOption(null);
+    // })
+  }, []);
+
+  // Option state값이 변경될때마다 해당 구문 호출
+  // dispatch로 saga에 'FLICKR_START'라는 액션타입으로 Option 정보값을 전달
+  useEffect(()=>{
+    dispatch({type: 'FLICKR_START', Option});
+  }, [Option]);
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setLoading(false);
+      frame.current.classList.add('on');
+      setClickable(true);
+    }, 500);
+  }, [Items]);
+
   return (
     <>
     <Layout name='gallery'>
@@ -93,20 +106,10 @@ export default function Gallery() {
       }
       <div className="controls">
         <nav>
-          <button
-            onClick={()=>{
-              frame.current.classList.remove('on');
-              getFlickr({type: 'interest'});
-            }}
-          >
+          <button onClick={showInterest}>
             Interest Gallery
           </button>
-          <button
-            onClick={()=>{
-              frame.current.classList.remove('on');
-              getFlickr({type: 'user', userid: '196649511@N03'});
-            }}
-          >
+          <button onClick={()=>showUser('196649511@N03')}>
             My Gallery
           </button>
         </nav>
@@ -141,10 +144,7 @@ export default function Gallery() {
                   <img src={`http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg`} alt={item.owner} onError={(e)=>{
                     e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif');
                   }} />
-                  <span onClick={()=>{
-                    frame.current.classList.remove('on');
-                    getFlickr({type: 'user', userid: item.owner});
-                  }}>{item.owner}</span>
+                  <span onClick={()=>showUser(item.owner)}>{item.owner}</span>
                 </div>
               </div>
             </article>
