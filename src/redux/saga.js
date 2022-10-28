@@ -10,7 +10,7 @@ call (saga에서 api관련 axios함수를 호출할 때 사용하는 함수, 두
 
 */
 
-import { takeLatest, all, put, fork, call } from 'redux-saga/effects'
+import { takeLatest, all, put, fork, call } from 'redux-saga/effects';
 import { getFlickr, getYoutube, getMembers } from './api';
 import * as types from './actionType';
 

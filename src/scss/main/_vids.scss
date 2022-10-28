@@ -1,30 +1,28 @@
 #vids{
   width: 100%;
   height: 100vh;
-  background-color: #fffac6;
+  background: linear-gradient(45deg, royalblue, cornflowerblue);
   position: relative;
-  padding: 10vw;
 
   .swiper{
     height: 100%;
+    padding: 20vh 20px;
 
     .swiper-slide{
-      width: 100%;
+      width: 540px;
       display: flex;
       justify-content: center;
-      align-items: center;
       font: bold 50px/1 'arial';
       color: #666;
 
       .inner{
         width: 100%;
         height: 100%;
-        padding: 20px;
+        padding: 30px;
         background-color: #fff;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
         opacity: 0.5;
         transform: scale(0.8);
         transition: 0.5s;
@@ -33,6 +31,7 @@
           width: 100%;
           height: 300px;
           overflow: hidden;
+          margin-bottom: 20px;
 
           img{
             width: 100%;
@@ -43,13 +42,8 @@
 
         .txt{
           h3{
-            font-size: 14px;
-          }
-          p{
-            font-size: 12px;
-          }
-          span{
-            font-size: 11px;
+            font: normal 40px/1 'Work Sans';
+            color: #333;
           }
         }
       }
@@ -59,6 +53,49 @@
           opacity: 1;
           transform: scale(1);
         }
+      }
+    }
+
+    .swiper-pagination{
+      bottom: 40px;
+      z-index: 5;
+      filter: grayscale(1) brightness(4);
+
+      .swiper-pagination-bullet{
+        width: 10px;
+        height: 10px;
+        border-radius: 4px;
+        transition: 0.5s;
+      }
+      .swiper-pagination-bullet-active{
+        width: 80px;
+      }
+    }
+
+    .swiper-button-prev,.swiper-button-next{
+      top: auto;
+      bottom: 30px;
+      z-index: 6;
+      transform: scale(0.5);
+      filter: grayscale(1) brightness(4);
+    }
+
+    .swiper-button-prev{
+      left: auto;
+      right: 60px;
+    }
+    .swiper-button-next{
+      right: 30px;
+    }
+  }
+  
+}
+
+@media screen and (max-width: $mobile) {
+  #vids{
+    .swiper{
+      .swiper-slide{
+        width: 100%;
       }
     }
   }
