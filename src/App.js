@@ -1,5 +1,10 @@
 import './scss/style.scss';
 import { Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchYoutube } from './redux/youtubeSlice';
+import { fetchMembers } from './redux/departmentSlice';
+import { fetchFlickr } from './redux/flickrSlice';
 
 // common
 import Footer from './components/common/Footer';
@@ -18,6 +23,14 @@ import Youtube from './components/sub/Youtube';
 
 
 function App() {
+
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(fetchYoutube());
+    dispatch(fetchMembers());
+    dispatch(fetchFlickr({type: 'interest'}));
+  }, [])
+
   return (
     <>
       {/* 

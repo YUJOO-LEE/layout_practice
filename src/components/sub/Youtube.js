@@ -1,24 +1,13 @@
 import Layout from '../common/Layout';
-import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import Popup from '../common/Popup';
 
 export default function Youtube() {
 
-  const [videos, setVideos] = useState([]);
+  const videos = useSelector(store=>store.youtube.data);
   const [index, setIndex] = useState(0);
   const pop = useRef(null);
-
-  useEffect(() => {
-    const key = 'AIzaSyAKqZ1Dx9awi1lCS84qziASeQYZJqLxLSM';
-    const playlist = 'PLtt429gshWMp4G-VhNTFhBzBTd7GOEz-G';
-    const num = 6;  
-    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playlist}&maxResults=${num}`;
-
-    axios.get(url).then((json)=>{
-      setVideos(json.data.items);
-    })
-  }, [])
 
   return (
     <>

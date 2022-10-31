@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import Layout from '../common/Layout';import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchFlickr } from '../../redux/flickrSlice';
+import Layout from '../common/Layout';
 import Masonry from 'react-masonry-component';
 import Popup from '../common/Popup';
 
 export default function Gallery() {
 
+  const dispatch = useDispatch();
   const masonryOptions = { transitionDuration: '0.5s' };
-  const [ Items, setItems ] = useState([]);
+  const Items = useSelector(store=>store.flickr.data);
   const [ Loading, setLoading ] = useState(true);
   const [ isClickable, setClickable ] = useState(true);
   const [ index, setIndex ] = useState(0);
@@ -16,27 +19,13 @@ export default function Gallery() {
   const pop = useRef(null);
 
   // 데이터 받아오기
-  const getFlickr = async (option)=>{
-    const key = '67f7c54ac9fe4dd292e245fbb1302b24';
-    const methodInterest = 'flickr.interestingness.getList';
-    const methodSearch = 'flickr.photos.search';
-    const methodUser = 'flickr.people.getPhotos';
-    const num = 50;
-
-    let url = '';
-    if (option.type === 'interest') {
-      url = `https://www.flickr.com/services/rest/?method=${methodInterest}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1`;
-    } else if (option.type === 'search') {
-      url = `https://www.flickr.com/services/rest/?method=${methodSearch}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&tags=${option.tags}`;
-    } else if (option.type === 'user') {
-      url = `https://www.flickr.com/services/rest/?method=${methodUser}&per_page=${num}&api_key=${key}&format=json&nojsoncallback=1&user_id=${option.userid}`;
-    }
+  const getFlickr = (option)=>{
     
     if (!isClickable) return;
     setClickable(false);
     setLoading(true);
-    const result = await axios.get(url);
-    setItems(result.data.photos.photo);
+    
+    dispatch(fetchFlickr(option));
 
     setTimeout(() => {
       setLoading(false);
@@ -59,11 +48,6 @@ export default function Gallery() {
     getFlickr({type: 'search', tags: keyword});
     searchInput.current.value = '';
   };
-
-  // 기본 데이터 interest로 뿌려주기
-  useEffect(()=>{
-    getFlickr({type: 'user', userid: '196649511@N03'});
-  }, []);
 
   /*
 
@@ -123,7 +107,7 @@ export default function Gallery() {
           elementType={'div'}
           options={masonryOptions}
         >
-        {Items.length ? Items.map((item, idx)=>{
+        {Items?.length ? Items.map((item, idx)=>{
           return (
             <article key={idx}>
               <div className='inner'>
@@ -154,7 +138,7 @@ export default function Gallery() {
     </Layout>
 
     <Popup ref={pop}>
-      {Items.length > 0 &&
+      {Items?.length > 0 &&
         <img src={`https://live.staticflickr.com/${Items[index].server}/${Items[index].id}_${Items[index].secret}_b.jpg`} alt={Items[index].title} />
       }
     </Popup>
